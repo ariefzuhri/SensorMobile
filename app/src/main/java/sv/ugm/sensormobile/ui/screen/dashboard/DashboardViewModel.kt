@@ -27,7 +27,7 @@ class DashboardViewModel @Inject constructor(
     init {
         checkLoginSession()
         getSensorRecords(
-            sensorType = _state.value.selectedSensorType,
+            sensorType = _state.value.navDrawerItemList.first().sensorType,
         )
     }
     
@@ -64,7 +64,6 @@ class DashboardViewModel @Inject constructor(
                 when (result) {
                     is Result.Loading -> {
                         _state.value = _state.value.copy(
-                            selectedSensorType = sensorType,
                             graphTitle = sensorRecordName,
                             isLoading = true,
                         )
@@ -72,7 +71,6 @@ class DashboardViewModel @Inject constructor(
                     
                     is Result.Success -> {
                         _state.value = _state.value.copy(
-                            selectedSensorType = sensorType,
                             graphTitle = sensorRecordName,
                             chartDataset = mapper.mapToChartDataset(
                                 input = result.data,
@@ -84,7 +82,6 @@ class DashboardViewModel @Inject constructor(
                     
                     is Result.Failure -> {
                         _state.value = _state.value.copy(
-                            selectedSensorType = sensorType,
                             graphTitle = sensorRecordName,
                             isLoading = false,
                             failureMessage = result.message,
