@@ -31,7 +31,6 @@ import sv.ugm.sensormobile.ui.util.LockScreenOrientation
 import sv.ugm.sensormobile.ui.util.SensorRecordMarkerLabelFormatter
 import sv.ugm.sensormobile.ui.util.asToast
 import sv.ugm.sensormobile.ui.util.load
-import sv.ugm.sensormobile.ui.util.loadOrEmpty
 import sv.ugm.sensormobile.ui.util.rememberMarkerLabelFormatter
 import sv.ugm.sensormobile.ui.util.rememberValueFormatter
 
@@ -96,7 +95,7 @@ private fun DashboardContent(
             TopBar(
                 title = stringResource(
                     id = R.string.txt_title_dashboard,
-                    state.selectedSensorRecordName.loadOrEmpty(),
+                    state.graphTitle.load(),
                 ),
                 menuContDesc = R.string.btn_cd_menu_topbar_dashboard.load(),
                 onMenuClick = {
