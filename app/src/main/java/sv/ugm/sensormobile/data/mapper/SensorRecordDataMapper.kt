@@ -4,7 +4,7 @@ import sv.ugm.sensormobile.data.source.remote.dto.SensorRecordSnapshot
 import sv.ugm.sensormobile.domain.model.SensorRecord
 import sv.ugm.sensormobile.domain.util.Constants
 import sv.ugm.sensormobile.domain.util.SensorType
-import sv.ugm.sensormobile.domain.util.orZero
+import sv.ugm.sensormobile.domain.util.toFloatOrZero
 import sv.ugm.sensormobile.domain.util.toMillis
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,7 +38,7 @@ class SensorRecordDataMapper @Inject constructor() {
                 SensorType.RainGauge -> input.rainDrop
                 SensorType.SoilMoistureSensor -> input.persentaseKelembapanTanah
                 SensorType.Thermometer -> input.temperature
-            }?.toFloat().orZero(),
+            }.toFloatOrZero(),
             timestampMillis = input.timestamp.orEmpty()
                 .toMillis(Constants.DateTimePatterns.Raw.TIMESTAMPS),
         )
