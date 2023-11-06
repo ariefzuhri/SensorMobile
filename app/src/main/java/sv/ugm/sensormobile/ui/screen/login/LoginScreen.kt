@@ -4,30 +4,28 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Password
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import sv.ugm.sensormobile.R
+import sv.ugm.sensormobile.ui.designsystem.component.Button
+import sv.ugm.sensormobile.ui.designsystem.component.TextField
 import sv.ugm.sensormobile.ui.util.CONTAINER_PADDING_DP
+import sv.ugm.sensormobile.ui.util.load
 
 @Composable
 fun LoginScreen(
@@ -61,71 +59,47 @@ private fun LoginContent(
             .padding(CONTAINER_PADDING_DP.dp),
     ) {
         Text(
-            text = "Login",
+            text = R.string.txt_title_login.load(),
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
         )
+        
         Spacer(modifier = Modifier.height(42.dp))
+        
         TextField(
-            label = {
-                Text(text = "Email")
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Rounded.Email,
-                    contentDescription = null,
-                )
-            },
-            placeholder = {
-                Text(text = "Masukkan email")
-            },
+            label = R.string.tf_label_email_login.load(),
+            leadingIcon = Icons.Rounded.Email,
+            placeholder = R.string.tf_placeholder_email_login.load(),
             value = state.email,
             onValueChange = { email ->
                 viewModel.onEvent(
                     LoginEvent.OnEmailChanged(email = email),
                 )
             },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
-                capitalization = KeyboardCapitalization.None,
-                imeAction = ImeAction.Next,
-            ),
-            maxLines = 1,
-            modifier = Modifier
-                .fillMaxWidth(),
+            keyboardType = KeyboardType.Email,
+            imeAction = ImeAction.Next,
         )
+        
         Spacer(modifier = Modifier.height(16.dp))
+        
         TextField(
-            label = {
-                Text(text = "Kata sandi")
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Rounded.Password,
-                    contentDescription = null,
-                )
-            },
-            placeholder = {
-                Text(text = "Masukkan kata sandi")
-            },
+            label = R.string.tf_label_password_login.load(),
+            leadingIcon = Icons.Rounded.Password,
+            placeholder = R.string.tf_placeholder_password_login.load(),
             value = state.password,
             onValueChange = { password ->
                 viewModel.onEvent(
                     LoginEvent.OnPasswordChanged(password = password),
                 )
             },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
-                capitalization = KeyboardCapitalization.None,
-                imeAction = ImeAction.Done,
-            ),
+            keyboardType = KeyboardType.Password,
             visualTransformation = PasswordVisualTransformation(),
-            maxLines = 1,
-            modifier = Modifier
-                .fillMaxWidth(),
         )
+        
         Spacer(modifier = Modifier.height(24.dp))
+        
         Button(
+            title = R.string.btn_login_login.load(),
             onClick = {
                 viewModel.onEvent(
                     LoginEvent.Login(
@@ -135,10 +109,6 @@ private fun LoginContent(
                 )
             },
             enabled = !state.isLoading,
-            modifier = Modifier
-                .fillMaxWidth(),
-        ) {
-            Text(text = "Login")
-        }
+        )
     }
 }

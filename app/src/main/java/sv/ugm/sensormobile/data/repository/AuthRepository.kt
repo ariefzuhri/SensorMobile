@@ -20,8 +20,11 @@ class AuthRepository @Inject constructor(
         password: String,
     ): Flow<LoginSession> {
         return localDataSource.getUserList()
-            .map { userList ->
-                val user = userList.find { it.email == email && it.password == password }
+            .map { userStaticList ->
+                val user = userStaticList.find {
+                    it.email == email &&
+                            it.password == password
+                }
                 LoginSession(
                     userId = user?.id ?: -1,
                     isValid = user != null,
@@ -30,16 +33,16 @@ class AuthRepository @Inject constructor(
     }
     
     override suspend fun storeLoginSession(loginSession: LoginSession) {
-        val entity = dataMapper.mapDomainToEntity(loginSession)
+        val preference = dataMapper.mapDomainToData(loginSession)
         localDataSource.updateLoginSession(
-            entity = entity,
+            preference = preference,
         )
     }
     
     override suspend fun getLoginSession(): Flow<LoginSession> {
         return localDataSource.getLoginSession()
-            .map { entity ->
-                dataMapper.mapEntityToDomain(entity)
+            .map { preference ->
+                dataMapper.mapDataToDomain(preference)
             }
     }
     

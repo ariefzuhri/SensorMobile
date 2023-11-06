@@ -1,6 +1,8 @@
 <resources>
+
     <string name="app_name">Sensor Mobile</string>
-    <string name="btn_cd_menu_topbar_app">Menu</string>
+
+    <string name="btn_cd_menu_topbar_dashboard">Menu</string>
     <string name="menu_photodetector_graph_dashboard">Pencahayaan</string>
     <string name="menu_soil_moisture_graph_dashboard">Kelembapan Tanah</string>
     <string name="menu_air_quality_graph_dashboard">Kualitas Udara</string>
@@ -9,5 +11,13 @@
     <string name="menu_temperature_graph_dashboard">Temperatur</string>
     <string name="menu_pressure_graph_dashboard">Tekanan Udara</string>
     <string name="menu_altitude_graph_dashboard">Approx Altitude</string>
+
     <string name="txt_title_dashboard">Grafik %1$s</string>
+    <string name="txt_title_login">Login</string>
+    <string name="tf_label_email_login">Email</string>
+    <string name="tf_placeholder_email_login">Masukkan email</string>
+    <string name="tf_label_password_login">Kata sandi</string>
+    <string name="tf_placeholder_password_login">Masukkan kata sandi</string>
+    <string name="btn_login_login">Masuk</string>
+
 </resources>

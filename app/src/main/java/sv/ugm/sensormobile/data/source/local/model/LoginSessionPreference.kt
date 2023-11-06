@@ -1,5 +1,5 @@
 package sv.ugm.sensormobile.data.source.local.model
 
-data class LoginSessionEntity(
+data class LoginSessionPreference(
     val userId: Int?,
 )

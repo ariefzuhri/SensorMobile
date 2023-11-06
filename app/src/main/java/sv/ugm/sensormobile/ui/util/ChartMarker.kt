@@ -41,7 +41,7 @@ private val labelHorizontalPaddingValue = 8.dp
 private val labelVerticalPaddingValue = 4.dp
 private val labelPadding = dimensionsOf(
     labelHorizontalPaddingValue,
-    labelVerticalPaddingValue
+    labelVerticalPaddingValue,
 )
 private val indicatorInnerAndCenterComponentPaddingValue = 5.dp
 private val indicatorCenterAndOuterComponentPaddingValue = 10.dp
@@ -67,6 +67,7 @@ fun rememberMarker(
             applyElevationOverlay = true,
         )
     }
+    
     val label = textComponent(
         background = labelBackground,
         lineCount = LABEL_LINE_COUNT,
@@ -75,6 +76,7 @@ fun rememberMarker(
         textAlignment = Layout.Alignment.ALIGN_CENTER,
         color = MaterialTheme.colorScheme.onSurface,
     )
+    
     val indicatorInnerComponent = shapeComponent(
         Shapes.pillShape,
         MaterialTheme.colorScheme.surface,
@@ -96,11 +98,13 @@ fun rememberMarker(
         ),
         innerPaddingAll = indicatorCenterAndOuterComponentPaddingValue,
     )
+    
     val guideline = lineComponent(
         MaterialTheme.colorScheme.onSurface.copy(GUIDELINE_ALPHA),
         guidelineThickness,
         guidelineShape,
     )
+    
     return remember(
         label,
         indicator,
@@ -115,8 +119,8 @@ fun rememberMarker(
             init {
                 indicatorSizeDp = INDICATOR_SIZE_DP
                 onApplyEntryColor = { entryColor ->
-                    indicatorOuterComponent.color =
-                        entryColor.copyColor(INDICATOR_OUTER_COMPONENT_ALPHA)
+                    indicatorOuterComponent.color = entryColor
+                        .copyColor(INDICATOR_OUTER_COMPONENT_ALPHA)
                     with(indicatorCenterComponent) {
                         color = entryColor
                         setShadow(

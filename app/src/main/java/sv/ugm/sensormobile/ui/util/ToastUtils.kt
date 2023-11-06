@@ -15,3 +15,10 @@ fun showToast(
         ).show()
     }
 }
+
+fun Any?.asToast(context: Context?) {
+    showToast(
+        context = context,
+        message = this,
+    )
+}

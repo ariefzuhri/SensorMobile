@@ -1,18 +1,18 @@
 package sv.ugm.sensormobile.ui.mapper
 
+import sv.ugm.sensormobile.domain.model.SensorRecord
 import sv.ugm.sensormobile.domain.util.Constants
 import sv.ugm.sensormobile.domain.util.toDateTimeString
-import sv.ugm.sensormobile.ui.model.SensorRecord
+import sv.ugm.sensormobile.ui.model.SensorRecordUi
 import javax.inject.Inject
 import javax.inject.Singleton
-import sv.ugm.sensormobile.domain.model.SensorRecord as SensorRecordDomain
 
 @Singleton
 class SensorRecordDataMapper @Inject constructor() {
     
-    fun mapDomainToUi(input: List<SensorRecordDomain>): List<SensorRecord> {
+    fun mapDomainToUi(input: List<SensorRecord>): List<SensorRecordUi> {
         return input.map {
-            SensorRecord(
+            SensorRecordUi(
                 value = it.value,
                 timestampMillis = it.timestampMillis,
                 date = it.timestampMillis.toDateTimeString(Constants.DateTimePatterns.Formatted.DATE),
@@ -21,7 +21,7 @@ class SensorRecordDataMapper @Inject constructor() {
         }
     }
     
-    fun mapToChartEntry(input: List<SensorRecordDomain>): Map<Number, Number> {
+    fun mapToChartEntry(input: List<SensorRecord>): Map<Number, Number> {
         return input.associate {
             it.timestampMillis to it.value
         }

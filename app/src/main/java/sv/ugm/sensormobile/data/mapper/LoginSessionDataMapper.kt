@@ -1,6 +1,6 @@
 package sv.ugm.sensormobile.data.mapper
 
-import sv.ugm.sensormobile.data.source.local.model.LoginSessionEntity
+import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
 import sv.ugm.sensormobile.domain.model.LoginSession
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -8,13 +8,13 @@ import javax.inject.Singleton
 @Singleton
 class LoginSessionDataMapper @Inject constructor(){
     
-    fun mapDomainToEntity(input: LoginSession): LoginSessionEntity {
-        return LoginSessionEntity(
+    fun mapDomainToData(input: LoginSession): LoginSessionPreference {
+        return LoginSessionPreference(
             userId = input.userId,
         )
     }
     
-    fun mapEntityToDomain(input: LoginSessionEntity): LoginSession {
+    fun mapDataToDomain(input: LoginSessionPreference): LoginSession {
         return LoginSession(
             userId = input.userId ?: -1,
             isValid = input.userId != null,

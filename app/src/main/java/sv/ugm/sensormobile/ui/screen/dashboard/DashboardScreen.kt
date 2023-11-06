@@ -29,11 +29,11 @@ import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
 import sv.ugm.sensormobile.ui.util.DateTimeValueFormatter
 import sv.ugm.sensormobile.ui.util.LockScreenOrientation
 import sv.ugm.sensormobile.ui.util.SensorRecordMarkerLabelFormatter
+import sv.ugm.sensormobile.ui.util.asToast
 import sv.ugm.sensormobile.ui.util.load
 import sv.ugm.sensormobile.ui.util.loadOrEmpty
 import sv.ugm.sensormobile.ui.util.rememberMarkerLabelFormatter
 import sv.ugm.sensormobile.ui.util.rememberValueFormatter
-import sv.ugm.sensormobile.ui.util.showToast
 
 @Composable
 fun DashboardScreen(
@@ -107,7 +107,7 @@ private fun DashboardContent(
                 },
             )
         },
-    ) { contentPadding ->
+    ) { innerPadding ->
         NavDrawer(
             drawerState = drawerState,
             scope = scope,
@@ -119,7 +119,8 @@ private fun DashboardContent(
                     )
                 )
             },
-            modifier = Modifier.padding(contentPadding),
+            modifier = Modifier
+                .padding(innerPadding),
         ) {
             Column(
                 modifier = Modifier

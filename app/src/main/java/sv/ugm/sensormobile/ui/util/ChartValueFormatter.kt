@@ -16,7 +16,8 @@ class DateTimeValueFormatter(
         value: Float,
         chartValues: ChartValues,
     ): CharSequence {
-        return value.toLong().toDateTimeString("$datePattern\n$timePattern")
+        val dateTimeMillis = value.toLong()
+        return dateTimeMillis.toDateTimeString("$datePattern\n$timePattern")
     }
     
 }

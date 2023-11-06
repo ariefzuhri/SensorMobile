@@ -19,8 +19,11 @@ class SensorRecordRemoteDataSource @Inject constructor(
     private val db: FirebaseDatabase,
 ) {
     
+    private val sensorRecordsRef by lazy {
+        db.getReference("sensor1")
+    }
+    
     suspend fun getSensorRecords(): Flow<RemoteResult<List<SensorRecordSnapshot>>> {
-        val sensorRecordsRef = db.getReference("sensor1")
         return sensorRecordsRef.addValueEventListenerFlow(SensorRecordSnapshot::class.java)
     }
     

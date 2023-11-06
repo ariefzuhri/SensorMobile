@@ -22,7 +22,9 @@ fun @receiver:StringRes Int?.loadOrEmpty(): String {
 }
 
 @Composable
-fun LockScreenOrientation(orientation: Int) {
+fun LockScreenOrientation(
+    orientation: Int,
+) {
     fun Context.findActivity(): Activity? {
         return when (this) {
             is Activity -> this

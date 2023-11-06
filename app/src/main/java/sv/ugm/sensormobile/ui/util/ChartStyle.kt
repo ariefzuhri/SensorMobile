@@ -42,6 +42,7 @@ fun rememberChartStyle(
     ) {
         val defaultColors =
             if (isSystemInDarkTheme) DefaultColors.Dark else DefaultColors.Light
+        
         ChartStyle(
             ChartStyle.Axis(
                 axisLabelColor = Color(defaultColors.axisLabelColor),
@@ -86,7 +87,9 @@ fun rememberChartStyle(
 }
 
 @Composable
-fun rememberChartStyle(chartColors: List<Color> = defaultChartColors()): ChartStyle {
+fun rememberChartStyle(
+    chartColors: List<Color> = defaultChartColors(),
+): ChartStyle {
     return rememberChartStyle(
         columnChartColors = chartColors,
         lineChartColors = chartColors,

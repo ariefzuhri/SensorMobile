@@ -12,11 +12,11 @@ import sv.ugm.sensormobile.ui.route.NavGraph
 fun SensorMobileApp(
     navController: NavHostController = rememberNavController(),
 ) {
-    Scaffold { contentPadding ->
+    Scaffold { innerPadding ->
         NavGraph(
             navController = navController,
             modifier = Modifier
-                .padding(contentPadding),
+                .padding(innerPadding),
         )
     }
 }

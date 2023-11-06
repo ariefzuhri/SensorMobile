@@ -10,6 +10,7 @@ import sv.ugm.sensormobile.domain.util.toDateTimeString
 
 class SensorRecordMarkerLabelFormatter : MarkerLabelFormatter {
     
+    @Suppress("UnnecessaryVariable")
     override fun getLabel(
         markedEntries: List<Marker.EntryModel>,
         chartValues: ChartValues,
@@ -17,10 +18,13 @@ class SensorRecordMarkerLabelFormatter : MarkerLabelFormatter {
         val x = markedEntries.first().entry.x
         val y = markedEntries.first().entry.y
         
-        val line1 = x.toLong().toDateTimeString(
+        val dateTimeMillis = x.toLong()
+        val value = y
+        
+        val line1 = dateTimeMillis.toDateTimeString(
             "${Constants.DateTimePatterns.Formatted.DATE} ${Constants.DateTimePatterns.Formatted.TIME}"
         )
-        @Suppress("UnnecessaryVariable") val line2 = y
+        val line2 = value
         
         return "$line1\n$line2"
     }

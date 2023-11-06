@@ -28,7 +28,9 @@ fun TopBar(
             }
         },
         title = {
-            Text(title)
+            Text(
+                text = title,
+            )
         },
         modifier = modifier,
     )

@@ -11,10 +11,12 @@ import sv.ugm.sensormobile.domain.repository.ISensorRecordRepository
 
 @Module(
     includes = [
-        RemoteDatabaseModule::class,
+        DataStoreModule::class,
+        FirebaseModule::class,
     ],
 )
 @InstallIn(SingletonComponent::class)
+@Suppress("unused")
 abstract class RepositoryModule {
     
     @Binds

@@ -1,6 +1,6 @@
-package sv.ugm.sensormobile.data.source.local.provider.statics
+package sv.ugm.sensormobile.data.source.local.provider
 
-import sv.ugm.sensormobile.data.source.local.model.UserEntity
+import sv.ugm.sensormobile.data.source.local.model.UserStatic
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -8,14 +8,14 @@ import javax.inject.Singleton
 class UserData @Inject constructor() {
     
     private val userList = listOf(
-        UserEntity(
+        UserStatic(
             id = 1,
             email = "sensormobile@mail.com",
             password = "sensormobile",
         )
     )
     
-    fun getAll(): List<UserEntity> {
+    fun getAll(): List<UserStatic> {
         return userList
     }
     
