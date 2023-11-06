@@ -14,17 +14,21 @@ import androidx.compose.ui.Modifier
 @Composable
 fun TopBar(
     title: String,
-    menuContDesc: String,
-    onMenuClick: () -> Unit,
     modifier: Modifier = Modifier,
+    menuContDesc: String? = null,
+    onMenuClick: (() -> Unit)? = null,
 ) {
     TopAppBar(
         navigationIcon = {
-            IconButton(onClick = onMenuClick) {
-                Icon(
-                    imageVector = Icons.Rounded.Menu,
-                    contentDescription = menuContDesc,
-                )
+            if (onMenuClick != null) {
+                IconButton(
+                    onClick = onMenuClick,
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Menu,
+                        contentDescription = menuContDesc,
+                    )
+                }
             }
         },
         title = {
