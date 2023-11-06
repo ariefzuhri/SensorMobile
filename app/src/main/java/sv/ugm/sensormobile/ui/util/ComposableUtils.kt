@@ -17,11 +17,6 @@ fun @receiver:StringRes Int.load(): String {
 }
 
 @Composable
-fun @receiver:StringRes Int?.loadOrEmpty(): String {
-    return this?.load().orEmpty()
-}
-
-@Composable
 fun LockScreenOrientation(
     orientation: Int,
 ) {
