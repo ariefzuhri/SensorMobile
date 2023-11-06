@@ -108,7 +108,7 @@ private fun LoginContent(
                     ),
                 )
             },
-            enabled = !state.isLoading,
+            enabled = !state.isLoading && state.email.isNotEmpty() && state.password.isNotEmpty(),
         )
     }
 }
