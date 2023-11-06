@@ -16,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -77,6 +78,7 @@ private fun LoginContent(
                 )
             },
             keyboardType = KeyboardType.Email,
+            capitalization = KeyboardCapitalization.None,
             imeAction = ImeAction.Next,
         )
         
@@ -93,6 +95,7 @@ private fun LoginContent(
                 )
             },
             keyboardType = KeyboardType.Password,
+            capitalization = KeyboardCapitalization.None,
             visualTransformation = PasswordVisualTransformation(),
         )
         
