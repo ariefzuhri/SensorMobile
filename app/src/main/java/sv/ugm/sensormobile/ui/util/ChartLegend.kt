@@ -15,9 +15,9 @@ import com.patrykandpatrick.vico.core.component.shape.Shapes
 
 private val legendItemLabelTextSize = 12.sp
 private val legendItemIconSize = 8.dp
-private val legendItemIconPaddingValue = 10.dp
+private val legendItemIconPaddingValue = 8.dp
 private val legendItemSpacing = 4.dp
-private val legendTopPaddingValue = 4.dp
+private val legendTopPaddingValue = 0.dp
 private val legendPadding = dimensionsOf(top = legendTopPaddingValue)
 
 @Composable
