@@ -6,7 +6,7 @@ import sv.ugm.sensormobile.ui.model.SensorRecordUi
 import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
 
 data class DashboardState(
-    val isLoggedIn: Boolean = true,
+    val isLoggedIn: Boolean? = null,
     
     val selectedSensorType: SensorType = SensorType.Photodetector,
     @StringRes val selectedSensorRecordName: Int? = DashboardNavDrawerItem.PhotodetectorGraph.title,

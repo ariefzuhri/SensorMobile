@@ -42,34 +42,34 @@ fun DashboardScreen(
     scope: CoroutineScope = rememberCoroutineScope(),
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
-    
-    LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
-    
-    BackHandler(enabled = drawerState.isOpen) {
-        scope.launch { drawerState.close() }
-    }
-    
     val state = viewModel.state.value
     
-    DashboardContent(
-        drawerState = drawerState,
-        scope = scope,
-        state = state,
-        viewModel = viewModel,
-    )
-    
-    val context = LocalContext.current
-    LaunchedEffect(state.failureMessage) {
-        showToast(
-            context = context,
-            message = state.failureMessage,
+    if (state.isLoggedIn == true) {
+        DashboardContent(
+            drawerState = drawerState,
+            scope = scope,
+            state = state,
+            viewModel = viewModel,
+        )
+        
+        val context = LocalContext.current
+        LaunchedEffect(state.failureMessage) {
+            state.failureMessage.asToast(context)
+        }
+        
+        BackHandler(enabled = drawerState.isOpen) {
+            scope.launch { drawerState.close() }
+        }
+        
+        LockScreenOrientation(
+            orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE,
+        )
+    } else {
+        CheckLoginSession(
+            state = state,
+            navigateToLogin = navigateToLogin,
         )
     }
-    
-    CheckLoginSession(
-        state = state,
-        navigateToLogin = navigateToLogin,
-    )
 }
 
 @Composable
@@ -78,7 +78,7 @@ fun CheckLoginSession(
     navigateToLogin: () -> Unit,
 ) {
     LaunchedEffect(state.isLoggedIn) {
-        if (!state.isLoggedIn) {
+        if (state.isLoggedIn == false) {
             navigateToLogin()
         }
     }
