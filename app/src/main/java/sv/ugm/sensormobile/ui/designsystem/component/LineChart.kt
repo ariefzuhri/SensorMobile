@@ -23,33 +23,35 @@ import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryOf
 import com.patrykandpatrick.vico.core.marker.DefaultMarkerLabelFormatter
 import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
+import sv.ugm.sensormobile.ui.model.ChartDataset
+import sv.ugm.sensormobile.ui.util.load
 import sv.ugm.sensormobile.ui.util.rememberChartStyle
 import sv.ugm.sensormobile.ui.util.rememberLegend
 import sv.ugm.sensormobile.ui.util.rememberMarker
 
 @Composable
 fun LineChart(
-    entries: List<Map<Number, Number>>,
+    datasets: List<ChartDataset>,
     modifier: Modifier = Modifier,
-    entryTitleList: List<String>? = null,
+    showLegend: Boolean = true,
     xAxisValueFormatter: AxisValueFormatter<AxisPosition.Horizontal.Bottom> = DecimalFormatAxisValueFormatter(),
     yAxisValueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start> = DecimalFormatAxisValueFormatter(),
     markerLabelFormatter: MarkerLabelFormatter = DefaultMarkerLabelFormatter(),
 ) {
-    val chartEntryModelProducer = remember(entries) {
+    val chartEntryModelProducer = remember(datasets) {
         ChartEntryModelProducer(
-            entries.map { entry ->
-                entry.map {
+            datasets.map { dataset ->
+                dataset.entries.map {
                     entryOf(
-                        x = it.key,
-                        y = it.value,
+                        x = it.x,
+                        y = it.y,
                     )
                 }
             }
         )
     }
     
-    val axisValuesOverrider = remember(entries) {
+    val axisValuesOverrider = remember(datasets) {
         object : AxisValuesOverrider<ChartEntryModel> {
             override fun getMaxY(model: ChartEntryModel): Float {
                 return model.maxY + 2f
@@ -81,11 +83,11 @@ fun LineChart(
         labelFormatter = markerLabelFormatter,
     )
     
-    val legend = entryTitleList?.let {
+    val legend = if (showLegend) {
         rememberLegend(
-            entryTitleList = it,
+            datasetLabels = datasets.map { it.label.load() },
         )
-    }
+    } else null
     
     ProvideChartStyle(rememberChartStyle()) {
         Chart(
@@ -106,16 +108,14 @@ fun LineChart(
 
 @Composable
 fun LineChart(
-    entry: Map<Number, Number>,
+    dataset: ChartDataset,
     modifier: Modifier = Modifier,
-    entryTitle: String? = null,
     xAxisValueFormatter: AxisValueFormatter<AxisPosition.Horizontal.Bottom> = DecimalFormatAxisValueFormatter(),
     yAxisValueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start> = DecimalFormatAxisValueFormatter(),
     markerLabelFormatter: MarkerLabelFormatter = DefaultMarkerLabelFormatter(),
 ) {
     LineChart(
-        entries = listOf(entry),
-        entryTitleList = entryTitle?.let { listOf(it) },
+        datasets = listOf(dataset),
         xAxisValueFormatter = xAxisValueFormatter,
         yAxisValueFormatter = yAxisValueFormatter,
         markerLabelFormatter = markerLabelFormatter,

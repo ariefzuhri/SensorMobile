@@ -1,5 +1,6 @@
 package sv.ugm.sensormobile.ui.screen.dashboard
 
+import androidx.annotation.StringRes
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -57,14 +58,14 @@ class DashboardViewModel @Inject constructor(
             getSensorRecordsUseCase(
                 sensorType = sensorType,
             ).collect { result ->
-                val sensorRecordName = _state.value.navDrawerItemList
-                    .firstOrNull { it.sensorType == sensorType }?.title
+                @StringRes val sensorRecordName = _state.value.navDrawerItemList
+                    .first { it.sensorType == sensorType }.title
                 
                 when (result) {
                     is Result.Loading -> {
                         _state.value = _state.value.copy(
                             selectedSensorType = sensorType,
-                            selectedSensorRecordName = sensorRecordName,
+                            graphTitle = sensorRecordName,
                             isLoading = true,
                         )
                     }
@@ -72,9 +73,11 @@ class DashboardViewModel @Inject constructor(
                     is Result.Success -> {
                         _state.value = _state.value.copy(
                             selectedSensorType = sensorType,
-                            selectedSensorRecordName = sensorRecordName,
-                            sensorRecords = mapper.mapDomainToUi(result.data),
-                            chartEntry = mapper.mapToChartEntry(result.data),
+                            graphTitle = sensorRecordName,
+                            chartDataset = mapper.mapToChartDataset(
+                                input = result.data,
+                                label = sensorRecordName,
+                            ),
                             isLoading = false,
                         )
                     }
@@ -82,7 +85,7 @@ class DashboardViewModel @Inject constructor(
                     is Result.Failure -> {
                         _state.value = _state.value.copy(
                             selectedSensorType = sensorType,
-                            selectedSensorRecordName = sensorRecordName,
+                            graphTitle = sensorRecordName,
                             isLoading = false,
                             failureMessage = result.message,
                         )

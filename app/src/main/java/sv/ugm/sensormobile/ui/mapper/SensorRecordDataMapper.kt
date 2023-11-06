@@ -1,8 +1,11 @@
 package sv.ugm.sensormobile.ui.mapper
 
+import androidx.annotation.StringRes
 import sv.ugm.sensormobile.domain.model.SensorRecord
 import sv.ugm.sensormobile.domain.util.Constants
 import sv.ugm.sensormobile.domain.util.toDateTimeString
+import sv.ugm.sensormobile.ui.model.ChartDataset
+import sv.ugm.sensormobile.ui.model.ChartEntry
 import sv.ugm.sensormobile.ui.model.SensorRecordUi
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,10 +24,20 @@ class SensorRecordDataMapper @Inject constructor() {
         }
     }
     
-    fun mapToChartEntry(input: List<SensorRecord>): Map<Number, Number> {
-        return input.associate {
-            it.timestampMillis to it.value
+    fun mapToChartDataset(
+        input: List<SensorRecord>,
+        @StringRes label: Int,
+    ): ChartDataset {
+        val chartEntries = input.map {
+            ChartEntry(
+                x = it.timestampMillis.toFloat(),
+                y = it.value,
+            )
         }
+        return ChartDataset(
+            label = label,
+            entries = chartEntries,
+        )
     }
     
 }

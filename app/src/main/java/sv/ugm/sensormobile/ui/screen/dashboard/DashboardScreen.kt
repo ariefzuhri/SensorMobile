@@ -146,8 +146,7 @@ private fun GraphSection(
     )
     
     LineChart(
-        entry = state.chartEntry,
-        entryTitle = state.selectedSensorRecordName.loadOrEmpty(),
+        dataset = state.chartDataset,
         xAxisValueFormatter = xAxisLabelFormatter,
         markerLabelFormatter = markerLabelFormatter,
         modifier = Modifier

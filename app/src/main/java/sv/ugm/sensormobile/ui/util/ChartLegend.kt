@@ -23,9 +23,9 @@ private val legendPadding = dimensionsOf(top = legendTopPaddingValue)
 @Composable
 fun rememberLegend(
     chartColors: List<Color> = defaultChartColors(),
-    entryTitleList: List<String>,
+    datasetLabels: List<String>,
 ) = horizontalLegend(
-    items = entryTitleList.mapIndexed { index, title ->
+    items = datasetLabels.mapIndexed { index, title ->
         legendItem(
             icon = shapeComponent(
                 Shapes.pillShape,
