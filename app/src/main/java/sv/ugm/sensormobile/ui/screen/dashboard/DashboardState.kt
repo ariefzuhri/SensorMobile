@@ -1,6 +1,7 @@
 package sv.ugm.sensormobile.ui.screen.dashboard
 
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Stable
 import sv.ugm.sensormobile.domain.util.SensorType
 import sv.ugm.sensormobile.ui.model.SensorRecordUi
 import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
@@ -17,6 +18,7 @@ data class DashboardState(
     val failureMessage: String? = null,
     
     val navDrawerItemList: List<DashboardNavDrawerItem> = listOf(
+    @Stable val navDrawerItemList: List<DashboardNavDrawerItem> = listOf(
         DashboardNavDrawerItem.PhotodetectorGraph,
         DashboardNavDrawerItem.SoilMoistureGraph,
         DashboardNavDrawerItem.AirQualityGraph,
