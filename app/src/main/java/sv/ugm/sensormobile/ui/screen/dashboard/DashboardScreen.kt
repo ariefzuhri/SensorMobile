@@ -98,7 +98,7 @@ private fun DashboardContent(
                     id = R.string.txt_title_dashboard,
                     state.selectedSensorRecordName.loadOrEmpty(),
                 ),
-                menuContDesc = R.string.btn_cd_menu_topbar_app.load(),
+                menuContDesc = R.string.btn_cd_menu_topbar_dashboard.load(),
                 onMenuClick = {
                     scope.launch {
                         if (drawerState.isOpen) drawerState.close()
