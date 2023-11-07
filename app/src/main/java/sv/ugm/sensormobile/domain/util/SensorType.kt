@@ -1,6 +1,6 @@
 package sv.ugm.sensormobile.domain.util
 
-sealed class SensorType{
+sealed class SensorType {
     data object AirQualitySensor : SensorType()
     data object Altimeter : SensorType()
     data object Hygrometer : SensorType()

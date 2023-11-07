@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LoginSessionDataMapper @Inject constructor(){
+class LoginSessionDataMapper @Inject constructor() {
     
     fun mapDomainToData(input: LoginSession): LoginSessionPreference {
         return LoginSessionPreference(
