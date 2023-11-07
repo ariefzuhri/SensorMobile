@@ -43,10 +43,16 @@ class DashboardViewModel @Inject constructor(
     
     private fun checkLoginSession() {
         viewModelScope.launch {
-            checkLoginSessionUseCase().collect { isLoggedIn ->
-                _state.value = _state.value.copy(
-                    isLoggedIn = isLoggedIn,
-                )
+            checkLoginSessionUseCase().collect { result ->
+                when (result) {
+                    is Result.Success -> {
+                        _state.value = _state.value.copy(
+                            isLoggedIn = result.data,
+                        )
+                    }
+                    
+                    else -> {}
+                }
             }
         }
     }

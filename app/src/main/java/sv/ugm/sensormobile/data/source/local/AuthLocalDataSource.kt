@@ -2,10 +2,11 @@ package sv.ugm.sensormobile.data.source.local
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
-import sv.ugm.sensormobile.data.source.local.model.UserStatic
 import sv.ugm.sensormobile.data.source.local.provider.LoginSessionDataStore
 import sv.ugm.sensormobile.data.source.local.provider.UserData
+import sv.ugm.sensormobile.data.util.LocalResult
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,15 +16,36 @@ class AuthLocalDataSource @Inject constructor(
     private val userData: UserData,
 ) {
     
-    suspend fun getUserList(): Flow<List<UserStatic>> {
+    // Dummy login
+    suspend fun login(
+        email: String,
+        password: String,
+    ): Flow<LocalResult<LoginSessionPreference>> {
         return flow {
             val userList = userData.getAll()
-            emit(userList)
+            val loggedInUser = userList.find {
+                it.email == email && it.password == password
+            }
+            
+            if (loggedInUser != null) {
+                val preference = LoginSessionPreference(
+                    userId = loggedInUser.id,
+                )
+                emit(LocalResult.Success(preference))
+            } else {
+                emit(
+                    LocalResult.Failure(
+                        Exception("Invalid email or password")
+                    )
+                )
+            }
         }
     }
     
-    fun getLoginSession(): Flow<LoginSessionPreference> {
-        return loginSessionDataStore.get()
+    fun getLoginSession(): Flow<LocalResult<LoginSessionPreference>> {
+        return loginSessionDataStore.get().map {
+            LocalResult.Success(it)
+        }
     }
     
     suspend fun updateLoginSession(preference: LoginSessionPreference) {

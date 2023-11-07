@@ -1,11 +1,14 @@
 package sv.ugm.sensormobile.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import sv.ugm.sensormobile.data.mapper.LoginSessionDataMapper
 import sv.ugm.sensormobile.data.source.local.AuthLocalDataSource
+import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
+import sv.ugm.sensormobile.data.util.LocalResource
+import sv.ugm.sensormobile.data.util.LocalResult
 import sv.ugm.sensormobile.domain.model.LoginSession
 import sv.ugm.sensormobile.domain.repository.IAuthRepository
+import sv.ugm.sensormobile.domain.util.Result
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,18 +21,19 @@ class AuthRepository @Inject constructor(
     override suspend fun login(
         email: String,
         password: String,
-    ): Flow<LoginSession> {
-        return localDataSource.getUserList()
-            .map { userStaticList ->
-                val user = userStaticList.find {
-                    it.email == email &&
-                            it.password == password
-                }
-                LoginSession(
-                    userId = user?.id ?: -1,
-                    isValid = user != null,
+    ): Flow<Result<LoginSession>> {
+        return object : LocalResource<LoginSessionPreference, LoginSession>() {
+            override suspend fun createCall(): Flow<LocalResult<LoginSessionPreference>> {
+                return localDataSource.login(
+                    email = email,
+                    password = password,
                 )
             }
+            
+            override suspend fun onFetchSuccess(data: LoginSessionPreference): LoginSession {
+                return dataMapper.mapDataToDomain(data)
+            }
+        }.asFlow()
     }
     
     override suspend fun storeLoginSession(loginSession: LoginSession) {
@@ -39,11 +43,16 @@ class AuthRepository @Inject constructor(
         )
     }
     
-    override suspend fun getLoginSession(): Flow<LoginSession> {
-        return localDataSource.getLoginSession()
-            .map { preference ->
-                dataMapper.mapDataToDomain(preference)
+    override suspend fun getLoginSession(): Flow<Result<LoginSession>> {
+        return object : LocalResource<LoginSessionPreference, LoginSession>() {
+            override suspend fun createCall(): Flow<LocalResult<LoginSessionPreference>> {
+                return localDataSource.getLoginSession()
             }
+            
+            override suspend fun onFetchSuccess(data: LoginSessionPreference): LoginSession {
+                return dataMapper.mapDataToDomain(data)
+            }
+        }.asFlow()
     }
     
     override suspend fun clearLoginSession() {

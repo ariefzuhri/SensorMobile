@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import sv.ugm.sensormobile.domain.usecase.LoginUseCase
+import sv.ugm.sensormobile.domain.util.Result
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,11 +52,28 @@ class LoginViewModel @Inject constructor(
             loginUseCase(
                 email = email,
                 password = password,
-            ).collect { loginSession ->
-                _state.value = _state.value.copy(
-                    isSuccess = loginSession.isValid,
-                    isLoading = loginSession.isValid,
-                )
+            ).collect { result ->
+                when (result) {
+                    is Result.Loading -> {
+                        _state.value = _state.value.copy(
+                            isLoading = true,
+                        )
+                    }
+                    
+                    is Result.Success -> {
+                        _state.value = _state.value.copy(
+                            isSuccess = result.data.isValid,
+                            isLoading = result.data.isValid,
+                        )
+                    }
+                    
+                    is Result.Failure -> {
+                        _state.value = _state.value.copy(
+                            isSuccess = false,
+                            isLoading = false,
+                        )
+                    }
+                }
             }
         }
     }
