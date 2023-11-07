@@ -25,7 +25,7 @@ val composeCompilerVersion by extra { "1.5.3" }
 val navigationVersion by extra { "2.7.5" }
 
 val hiltVersion by extra { "2.48.1" }
-val hiltNavigationComposeVersion by extra { "1.0.0" }
+val hiltNavigationComposeVersion by extra { "1.1.0" }
 
 val dataStoreVersion by extra { "1.0.0" }
 
