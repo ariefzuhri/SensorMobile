@@ -1,5 +1,7 @@
 package sv.ugm.sensormobile.domain.util
 
+import kotlin.math.roundToInt
+
 /**
  * Determines whether the string is a numeric value,
  * including integers, decimals, and negative numbers.
@@ -18,4 +20,15 @@ fun String?.isNumber(): Boolean {
  */
 fun String?.toFloatOrZero(): Float {
     return this?.takeIf { it.isNumber() }?.toFloat() ?: 0f
+}
+
+/**
+ * Converts the String to an integer
+ * by rounding it to the nearest whole number if it represents a numeric value,
+ * or returns 0 if the String is null or not a numeric value.
+ *
+ * @return The rounded integer value of the String if it's a valid numeric value, or 0 otherwise.
+ */
+fun String?.roundToIntOrZero(): Int {
+    return this?.takeIf { it.isNumber() }?.toFloat()?.roundToInt() ?: 0
 }
