@@ -78,7 +78,7 @@ class DashboardViewModel @Inject constructor(
                     is Result.Success -> {
                         _state.value = _state.value.copy(
                             graphTitle = sensorRecordName,
-                            chartDataset = mapper.mapToChartDataset(
+                            chartData = mapper.mapToChartData(
                                 input = result.data,
                                 label = sensorRecordName,
                             ),

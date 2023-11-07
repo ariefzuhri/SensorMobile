@@ -1,6 +1,7 @@
 package sv.ugm.sensormobile.ui.designsystem.component
 
 import android.text.TextUtils
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -14,16 +15,12 @@ import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.compose.chart.scroll.rememberChartScrollSpec
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
-import com.patrykandpatrick.vico.core.axis.AxisPosition
-import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
-import com.patrykandpatrick.vico.core.axis.formatter.DecimalFormatAxisValueFormatter
 import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModel
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryOf
-import com.patrykandpatrick.vico.core.marker.DefaultMarkerLabelFormatter
-import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
-import sv.ugm.sensormobile.ui.model.ChartDataset
+import sv.ugm.sensormobile.domain.util.roundToIntOrZero
+import sv.ugm.sensormobile.ui.model.ChartDataUi
 import sv.ugm.sensormobile.ui.util.load
 import sv.ugm.sensormobile.ui.util.rememberChartStyle
 import sv.ugm.sensormobile.ui.util.rememberLegend
@@ -31,27 +28,24 @@ import sv.ugm.sensormobile.ui.util.rememberMarker
 
 @Composable
 fun LineChart(
-    datasets: List<ChartDataset>,
+    data: ChartDataUi,
     modifier: Modifier = Modifier,
     showLegend: Boolean = true,
-    xAxisValueFormatter: AxisValueFormatter<AxisPosition.Horizontal.Bottom> = DecimalFormatAxisValueFormatter(),
-    yAxisValueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start> = DecimalFormatAxisValueFormatter(),
-    markerLabelFormatter: MarkerLabelFormatter = DefaultMarkerLabelFormatter(),
 ) {
-    val chartEntryModelProducer = remember(datasets) {
+    val chartEntryModelProducer = remember(data) {
         ChartEntryModelProducer(
-            datasets.map { dataset ->
+            data.datasets.map { dataset ->
                 dataset.entries.map {
                     entryOf(
-                        x = it.x,
-                        y = it.y,
+                        x = it.xValue,
+                        y = it.yValue,
                     )
                 }
             }
         )
     }
     
-    val axisValuesOverrider = remember(datasets) {
+    val axisValuesOverrider = remember(data) {
         object : AxisValuesOverrider<ChartEntryModel> {
             override fun getMaxY(model: ChartEntryModel): Float {
                 return model.maxY + 2f
@@ -63,6 +57,10 @@ fun LineChart(
         }
     }
     
+    val maxEntrySize = remember(data) {
+        data.datasets.maxOfOrNull { it.entries.size } ?: 0
+    }
+    
     val xAxis = rememberBottomAxis(
         guideline = null,
         label = axisLabelComponent(
@@ -70,22 +68,51 @@ fun LineChart(
             ellipsize = TextUtils.TruncateAt.MARQUEE,
         ),
         tick = null,
-        valueFormatter = xAxisValueFormatter,
-        labelRotationDegrees = 45f,
-        itemPlacer = AxisItemPlacer.Horizontal.default(5),
+        valueFormatter = { value, _ ->
+            val valueIndex = value.toInt()
+            data.xAxisLabelList.getOrNull(valueIndex)
+                ?: value.toString().roundToIntOrZero().toString()
+        },
+        labelRotationDegrees = 90f,
+        itemPlacer = AxisItemPlacer.Horizontal.default(
+            spacing = maxEntrySize / 10,
+            offset = maxEntrySize / 20,
+        )
     )
     
     val yAxis = rememberStartAxis(
-        valueFormatter = yAxisValueFormatter,
+        valueFormatter = { value, _ ->
+            val valueIndex = value.toInt()
+            data.yAxisLabelList.getOrNull(valueIndex)
+                ?: value.toString().roundToIntOrZero().toString()
+        },
     )
     
     val marker = rememberMarker(
-        labelFormatter = markerLabelFormatter,
+        labelFormatter = { markedEntries, _ ->
+            val (xValue, yValue) = markedEntries.first().entry.apply {
+                x to y
+            }
+            
+            // TODO: The library doesn't yet support retrieving the entry index of marked entries
+            val entryIndex = 0
+            val xIndex = xValue.toLong()
+            val yIndex = yValue.toLong()
+            
+            val x: String =
+                data.datasets[entryIndex].entries.getOrNull(xIndex.toInt())?.xMarkerLabel
+                    ?: xValue.toString()
+            val y: String =
+                data.datasets[entryIndex].entries.getOrNull(yIndex.toInt())?.yMarkerLabel
+                    ?: yValue.toString()
+            
+            "$x: $y"
+        },
     )
     
     val legend = if (showLegend) {
         rememberLegend(
-            datasetLabels = datasets.map { it.label.load() },
+            datasetLabels = data.datasets.map { it.label.load() },
         )
     } else null
     
@@ -98,27 +125,11 @@ fun LineChart(
             startAxis = yAxis,
             bottomAxis = xAxis,
             marker = marker,
-            chartScrollSpec = rememberChartScrollSpec(isScrollEnabled = false),
             legend = legend,
+            chartScrollSpec = rememberChartScrollSpec(isScrollEnabled = false),
+            diffAnimationSpec = remember { snap() },
             modifier = modifier
                 .height(260.dp),
         )
     }
-}
-
-@Composable
-fun LineChart(
-    dataset: ChartDataset,
-    modifier: Modifier = Modifier,
-    xAxisValueFormatter: AxisValueFormatter<AxisPosition.Horizontal.Bottom> = DecimalFormatAxisValueFormatter(),
-    yAxisValueFormatter: AxisValueFormatter<AxisPosition.Vertical.Start> = DecimalFormatAxisValueFormatter(),
-    markerLabelFormatter: MarkerLabelFormatter = DefaultMarkerLabelFormatter(),
-) {
-    LineChart(
-        datasets = listOf(dataset),
-        xAxisValueFormatter = xAxisValueFormatter,
-        yAxisValueFormatter = yAxisValueFormatter,
-        markerLabelFormatter = markerLabelFormatter,
-        modifier = modifier,
-    )
 }

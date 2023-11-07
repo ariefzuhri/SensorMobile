@@ -20,19 +20,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import sv.ugm.sensormobile.R
-import sv.ugm.sensormobile.domain.util.Constants
 import sv.ugm.sensormobile.ui.designsystem.component.LineChart
 import sv.ugm.sensormobile.ui.designsystem.component.NavDrawer
 import sv.ugm.sensormobile.ui.designsystem.component.TopBar
 import sv.ugm.sensormobile.ui.util.CONTAINER_PADDING_DP
 import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
-import sv.ugm.sensormobile.ui.util.DateTimeValueFormatter
 import sv.ugm.sensormobile.ui.util.LockScreenOrientation
-import sv.ugm.sensormobile.ui.util.SensorRecordMarkerLabelFormatter
 import sv.ugm.sensormobile.ui.util.asToast
 import sv.ugm.sensormobile.ui.util.load
-import sv.ugm.sensormobile.ui.util.rememberMarkerLabelFormatter
-import sv.ugm.sensormobile.ui.util.rememberValueFormatter
 
 @Composable
 fun DashboardScreen(
@@ -135,20 +130,8 @@ private fun DashboardContent(
 private fun GraphSection(
     state: DashboardState,
 ) {
-    val xAxisLabelFormatter = rememberValueFormatter(
-        DateTimeValueFormatter(
-            datePattern = Constants.DateTimePatterns.Formatted.SHORT_DATE,
-            timePattern = Constants.DateTimePatterns.Formatted.SHORT_TIME,
-        )
-    )
-    val markerLabelFormatter = rememberMarkerLabelFormatter(
-        SensorRecordMarkerLabelFormatter()
-    )
-    
     LineChart(
-        dataset = state.chartDataset,
-        xAxisValueFormatter = xAxisLabelFormatter,
-        markerLabelFormatter = markerLabelFormatter,
+        data = state.chartData,
         modifier = Modifier
             .fillMaxSize(),
     )
