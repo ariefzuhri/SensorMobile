@@ -27,7 +27,7 @@ import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
 
 private const val LABEL_BACKGROUND_SHADOW_RADIUS = 4f
 private const val LABEL_BACKGROUND_SHADOW_DY = 2f
-private const val LABEL_LINE_COUNT = 2
+private const val LABEL_LINE_COUNT = 1
 private const val GUIDELINE_ALPHA = .2f
 private const val INDICATOR_SIZE_DP = 36f
 private const val INDICATOR_OUTER_COMPONENT_ALPHA = 32
@@ -55,6 +55,7 @@ private val guidelineShape = DashedShape(
 @Composable
 fun rememberMarker(
     labelFormatter: MarkerLabelFormatter,
+    labelLineCount: Int = LABEL_LINE_COUNT,
 ): Marker {
     val labelBackgroundColor = MaterialTheme.colorScheme.surface
     val labelBackground = remember(labelBackgroundColor) {
@@ -70,7 +71,7 @@ fun rememberMarker(
     
     val label = textComponent(
         background = labelBackground,
-        lineCount = LABEL_LINE_COUNT,
+        lineCount = labelLineCount,
         padding = labelPadding,
         typeface = Typeface.MONOSPACE,
         textAlignment = Layout.Alignment.ALIGN_CENTER,
