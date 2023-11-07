@@ -90,7 +90,7 @@ class DashboardViewModel @Inject constructor(
                         _state.value = _state.value.copy(
                             graphTitle = sensorRecordName,
                             isLoading = false,
-                            failureMessage = result.message,
+                            failureMessage = mutableStateOf(result.message),
                         )
                     }
                 }

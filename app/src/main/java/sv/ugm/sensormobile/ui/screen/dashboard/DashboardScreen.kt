@@ -53,7 +53,7 @@ fun DashboardScreen(
         
         val context = LocalContext.current
         LaunchedEffect(state.failureMessage) {
-            state.failureMessage.asToast(context)
+            state.failureMessage.value.asToast(context)
         }
         
         BackHandler(enabled = drawerState.isOpen) {

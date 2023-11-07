@@ -2,6 +2,8 @@ package sv.ugm.sensormobile.ui.screen.dashboard
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import sv.ugm.sensormobile.ui.model.ChartDataset
 import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
 
@@ -26,5 +28,5 @@ data class DashboardState(
         emptyList(),
     ),
     val isLoading: Boolean = false,
-    val failureMessage: String? = null,
+    val failureMessage: State<String?> = mutableStateOf(null),
 )
