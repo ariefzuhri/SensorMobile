@@ -71,6 +71,7 @@ class LoginViewModel @Inject constructor(
                         _state.value = _state.value.copy(
                             isSuccess = false,
                             isLoading = false,
+                            failureMessage = mutableStateOf(result.message),
                         )
                     }
                 }

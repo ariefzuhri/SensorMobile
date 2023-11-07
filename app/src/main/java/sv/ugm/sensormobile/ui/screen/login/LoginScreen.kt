@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -26,6 +27,7 @@ import sv.ugm.sensormobile.R
 import sv.ugm.sensormobile.ui.designsystem.component.Button
 import sv.ugm.sensormobile.ui.designsystem.component.TextField
 import sv.ugm.sensormobile.ui.util.CONTAINER_PADDING_DP
+import sv.ugm.sensormobile.ui.util.asToast
 import sv.ugm.sensormobile.ui.util.load
 
 @Composable
@@ -44,6 +46,11 @@ fun LoginScreen(
         if (state.isSuccess) {
             restartApp()
         }
+    }
+    
+    val context = LocalContext.current
+    LaunchedEffect(state.failureMessage) {
+        state.failureMessage.value.asToast(context)
     }
 }
 
