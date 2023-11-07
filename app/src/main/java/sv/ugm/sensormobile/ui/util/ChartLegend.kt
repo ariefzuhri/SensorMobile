@@ -29,7 +29,7 @@ fun rememberLegend(
         legendItem(
             icon = shapeComponent(
                 Shapes.pillShape,
-                chartColors[index],
+                chartColors[index % chartColors.size],
             ),
             label = textComponent(
                 color = currentChartStyle.axis.axisLabelColor,
