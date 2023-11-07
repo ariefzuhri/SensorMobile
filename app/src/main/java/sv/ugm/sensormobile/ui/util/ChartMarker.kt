@@ -2,6 +2,7 @@ package sv.ugm.sensormobile.ui.util
 
 import android.graphics.Typeface
 import android.text.Layout
+import android.text.TextUtils
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -76,6 +77,7 @@ fun rememberMarker(
         typeface = Typeface.MONOSPACE,
         textAlignment = Layout.Alignment.ALIGN_CENTER,
         color = MaterialTheme.colorScheme.onSurface,
+        ellipsize = TextUtils.TruncateAt.MARQUEE,
     )
     
     val indicatorInnerComponent = shapeComponent(
