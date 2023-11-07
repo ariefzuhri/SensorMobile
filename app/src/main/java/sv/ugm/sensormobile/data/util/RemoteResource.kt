@@ -7,7 +7,6 @@ import sv.ugm.sensormobile.domain.util.Result
 abstract class RemoteResource<DTOType : Any, DomainType : Any> {
     
     private var result: Flow<Result<DomainType>> = flow {
-        
         createCall().collect { remoteResult ->
             when (remoteResult) {
                 is RemoteResult.Loading -> {
