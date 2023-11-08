@@ -15,16 +15,18 @@ import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.compose.chart.scroll.rememberChartScrollSpec
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisItemPlacer
+import com.patrykandpatrick.vico.core.axis.AxisPosition
+import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModel
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryOf
-import sv.ugm.sensormobile.domain.util.roundToIntOrZero
 import sv.ugm.sensormobile.ui.model.ChartDataUi
 import sv.ugm.sensormobile.ui.util.load
 import sv.ugm.sensormobile.ui.util.rememberChartStyle
 import sv.ugm.sensormobile.ui.util.rememberLegend
 import sv.ugm.sensormobile.ui.util.rememberMarker
+import kotlin.math.roundToInt
 
 @Composable
 fun LineChart(
@@ -60,6 +62,19 @@ fun LineChart(
     
     val maxEntrySize = remember(data) {
         data.datasets.maxOfOrNull { it.entries.size } ?: 0
+    val xAxisValueFormatter = remember(data) {
+        AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
+            val valueIndex = value.toInt()
+            data.xAxisLabelList.getOrNull(valueIndex) ?: value.roundToInt().toString()
+        }
+    }
+    
+    val yAxisValueFormatter = remember(data) {
+        AxisValueFormatter<AxisPosition.Vertical.Start> { value, _ ->
+            val valueIndex = value.toInt()
+            data.yAxisLabelList.getOrNull(valueIndex) ?: value.roundToInt().toString()
+        }
+    }
     }
     
     val xAxis = rememberBottomAxis(
@@ -69,11 +84,7 @@ fun LineChart(
             ellipsize = TextUtils.TruncateAt.MARQUEE,
         ),
         tick = null,
-        valueFormatter = { value, _ ->
-            val valueIndex = value.toInt()
-            data.xAxisLabelList.getOrNull(valueIndex)
-                ?: value.toString().roundToIntOrZero().toString()
-        },
+        valueFormatter = xAxisValueFormatter,
         labelRotationDegrees = 90f,
         itemPlacer = AxisItemPlacer.Horizontal.default(
             spacing = maxEntrySize / 10,
@@ -83,12 +94,7 @@ fun LineChart(
     ).takeIf { data.datasets.isNotEmpty() }
     
     val yAxis = rememberStartAxis(
-        valueFormatter = { value, _ ->
-            val valueIndex = value.toInt()
-            data.yAxisLabelList.getOrNull(valueIndex)
-                ?: value.toString().roundToIntOrZero().toString()
-        },
-    )
+        valueFormatter = yAxisValueFormatter,
     ).takeIf { data.datasets.isNotEmpty() }
     
     val marker = rememberMarker(
@@ -103,10 +109,10 @@ fun LineChart(
             val yIndex = yValue.toLong()
             
             val x: String =
-                data.datasets[entryIndex].entries.getOrNull(xIndex.toInt())?.xMarkerLabel
+                data.datasets.getOrNull(entryIndex)?.entries?.getOrNull(xIndex.toInt())?.xMarkerLabel
                     ?: xValue.toString()
             val y: String =
-                data.datasets[entryIndex].entries.getOrNull(yIndex.toInt())?.yMarkerLabel
+                data.datasets.getOrNull(entryIndex)?.entries?.getOrNull(yIndex.toInt())?.yMarkerLabel
                     ?: yValue.toString()
             
             "$x: $y"
