@@ -60,8 +60,6 @@ fun LineChart(
         }
     }
     
-    val maxEntrySize = remember(data) {
-        data.datasets.maxOfOrNull { it.entries.size } ?: 0
     val xAxisValueFormatter = remember(data) {
         AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
             val valueIndex = value.toInt()
@@ -75,6 +73,13 @@ fun LineChart(
             data.yAxisLabelList.getOrNull(valueIndex) ?: value.roundToInt().toString()
         }
     }
+    
+    val xAxisItemPlacer = remember(data) {
+        val maxEntrySize = data.datasets.maxOfOrNull { it.entries.size } ?: 0
+        AxisItemPlacer.Horizontal.default(
+            spacing = maxEntrySize / 10,
+            offset = maxEntrySize / 20,
+        )
     }
     
     val xAxis = rememberBottomAxis(
@@ -86,11 +91,7 @@ fun LineChart(
         tick = null,
         valueFormatter = xAxisValueFormatter,
         labelRotationDegrees = 90f,
-        itemPlacer = AxisItemPlacer.Horizontal.default(
-            spacing = maxEntrySize / 10,
-            offset = maxEntrySize / 20,
-        )
-    )
+        itemPlacer = xAxisItemPlacer,
     ).takeIf { data.datasets.isNotEmpty() }
     
     val yAxis = rememberStartAxis(
@@ -119,11 +120,9 @@ fun LineChart(
         },
     )
     
-    val legend = if (showLegend) {
-        rememberLegend(
-            datasetLabels = data.datasets.map { it.label.load() },
-        )
-    } else null
+    val legend = rememberLegend(
+        datasetLabels = data.datasets.map { it.label.load() },
+    ).takeIf { showLegend }
     
     ProvideChartStyle(rememberChartStyle(showDataPoint = showDataPoint)) {
         Chart(
