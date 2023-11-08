@@ -12,6 +12,7 @@ import com.patrykandpatrick.vico.compose.legend.horizontalLegend
 import com.patrykandpatrick.vico.compose.legend.legendItem
 import com.patrykandpatrick.vico.compose.style.currentChartStyle
 import com.patrykandpatrick.vico.core.component.shape.Shapes
+import com.patrykandpatrick.vico.core.legend.HorizontalLegend
 
 private val legendItemLabelTextSize = 12.sp
 private val legendItemIconSize = 8.dp
@@ -24,23 +25,25 @@ private val legendPadding = dimensionsOf(top = legendTopPaddingValue)
 fun rememberLegend(
     chartColors: List<Color> = defaultChartColors(),
     datasetLabels: List<String>,
-) = horizontalLegend(
-    items = datasetLabels.mapIndexed { index, title ->
-        legendItem(
-            icon = shapeComponent(
-                Shapes.pillShape,
-                chartColors[index % chartColors.size],
-            ),
-            label = textComponent(
-                color = currentChartStyle.axis.axisLabelColor,
-                textSize = legendItemLabelTextSize,
-                typeface = Typeface.MONOSPACE,
-            ),
-            labelText = title
-        )
-    },
-    iconSize = legendItemIconSize,
-    iconPadding = legendItemIconPaddingValue,
-    spacing = legendItemSpacing,
-    padding = legendPadding,
-)
+): HorizontalLegend? {
+    return horizontalLegend(
+        items = datasetLabels.mapIndexed { index, title ->
+            legendItem(
+                icon = shapeComponent(
+                    Shapes.pillShape,
+                    chartColors[index % chartColors.size],
+                ),
+                label = textComponent(
+                    color = currentChartStyle.axis.axisLabelColor,
+                    textSize = legendItemLabelTextSize,
+                    typeface = Typeface.MONOSPACE,
+                ),
+                labelText = title
+            )
+        },
+        iconSize = legendItemIconSize,
+        iconPadding = legendItemIconPaddingValue,
+        spacing = legendItemSpacing,
+        padding = legendPadding,
+    ).takeIf { datasetLabels.isNotEmpty() && chartColors.isNotEmpty() }
+}
