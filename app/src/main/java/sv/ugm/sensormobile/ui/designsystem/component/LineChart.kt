@@ -80,6 +80,7 @@ fun LineChart(
             offset = maxEntrySize / 20,
         )
     )
+    ).takeIf { data.datasets.isNotEmpty() }
     
     val yAxis = rememberStartAxis(
         valueFormatter = { value, _ ->
@@ -88,6 +89,7 @@ fun LineChart(
                 ?: value.toString().roundToIntOrZero().toString()
         },
     )
+    ).takeIf { data.datasets.isNotEmpty() }
     
     val marker = rememberMarker(
         labelFormatter = { markedEntries, _ ->
