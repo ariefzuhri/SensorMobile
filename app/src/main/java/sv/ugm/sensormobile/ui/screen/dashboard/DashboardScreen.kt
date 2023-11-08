@@ -132,6 +132,7 @@ private fun GraphSection(
 ) {
     LineChart(
         data = state.chartData,
+        showDataPoint = false,
         modifier = Modifier
             .fillMaxSize(),
     )
