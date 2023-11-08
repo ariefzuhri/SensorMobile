@@ -12,6 +12,7 @@ import com.patrykandpatrick.vico.compose.style.ChartStyle
 import com.patrykandpatrick.vico.core.DefaultAlpha
 import com.patrykandpatrick.vico.core.DefaultColors
 import com.patrykandpatrick.vico.core.DefaultDimens
+import com.patrykandpatrick.vico.core.chart.DefaultPointConnector
 import com.patrykandpatrick.vico.core.chart.line.LineChart
 import com.patrykandpatrick.vico.core.component.shape.LineComponent
 import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
@@ -31,6 +32,7 @@ val defaultChartColors =
 fun rememberChartStyle(
     columnChartColors: List<Color>,
     lineChartColors: List<Color>,
+    showDataPoint: Boolean = true,
 ): ChartStyle {
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val colorScheme = MaterialTheme.colorScheme
@@ -70,13 +72,14 @@ fun rememberChartStyle(
                                 ),
                             ),
                         ),
+                        pointConnector = DefaultPointConnector(),
                         pointSizeDp = 10f,
                         point = ShapeComponent(
                             shape = Shapes.pillShape,
                             color = lineChartColor.toArgb(),
                             strokeWidthDp = 1f,
                             strokeColor = colorScheme.surface.toArgb(),
-                        ),
+                        ).takeIf { showDataPoint },
                     )
                 },
             ),
@@ -89,9 +92,11 @@ fun rememberChartStyle(
 @Composable
 fun rememberChartStyle(
     chartColors: List<Color> = defaultChartColors(),
+    showDataPoint: Boolean = true,
 ): ChartStyle {
     return rememberChartStyle(
         columnChartColors = chartColors,
         lineChartColors = chartColors,
+        showDataPoint = showDataPoint,
     )
 }

@@ -31,6 +31,7 @@ fun LineChart(
     data: ChartDataUi,
     modifier: Modifier = Modifier,
     showLegend: Boolean = true,
+    showDataPoint: Boolean = true,
 ) {
     val chartEntryModelProducer = remember(data) {
         ChartEntryModelProducer(
@@ -116,7 +117,7 @@ fun LineChart(
         )
     } else null
     
-    ProvideChartStyle(rememberChartStyle()) {
+    ProvideChartStyle(rememberChartStyle(showDataPoint = showDataPoint)) {
         Chart(
             chart = lineChart(
                 axisValuesOverrider = axisValuesOverrider,
