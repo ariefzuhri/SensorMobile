@@ -38,8 +38,8 @@ class SensorRecordDataMapper @Inject constructor() {
                 SensorType.RainGauge -> input.rainDrop
                 SensorType.SoilMoistureSensor -> input.persentaseKelembapanTanah
                 SensorType.Thermometer -> input.temperature
-            }.toFloatOrZero(),
-            timestampMillis = input.timestamp.orEmpty()
+            }?.toString().toFloatOrZero(),
+            timestampMillis = input.timestamp.toString()
                 .toMillis(Constants.DateTimePatterns.Raw.TIMESTAMPS),
         )
     }

@@ -5,30 +5,30 @@ import com.google.firebase.database.PropertyName
 data class SensorRecordSnapshot(
     
     @PropertyName("AirQuality")
-    val airQuality: String? = null,
+    val airQuality: Any? = null,
     
     @PropertyName("ApproxAltitude")
-    val approxAltitude: String? = null,
+    val approxAltitude: Any? = null,
     
     @PropertyName("H")
-    val h: String? = null,
+    val h: Any? = null,
     
     @PropertyName("Light")
-    val light: String? = null,
+    val light: Any? = null,
     
     @PropertyName("PersentaseKelembapanTanah")
-    val persentaseKelembapanTanah: String? = null,
+    val persentaseKelembapanTanah: Any? = null,
     
     @PropertyName("Pressure")
-    val pressure: String? = null,
+    val pressure: Any? = null,
     
     @PropertyName("RainDrop")
-    val rainDrop: String? = null,
+    val rainDrop: Any? = null,
     
     @PropertyName("Temperature")
-    val temperature: String? = null,
+    val temperature: Any? = null,
     
     @PropertyName("TimeStamp")
-    val timestamp: String? = null,
+    val timestamp: Any? = null,
     
     )
