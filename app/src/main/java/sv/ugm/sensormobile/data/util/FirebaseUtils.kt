@@ -15,12 +15,19 @@ suspend fun <T : Any> DatabaseReference.addValueEventListenerFlow(
     return callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val values = mutableListOf<T>()
-                dataSnapshot.children.forEach { child ->
-                    val sensorRecord = child.getValue(dataType)
-                    sensorRecord?.let { values.add(it) }
+                try {
+                    val values = mutableListOf<T>()
+                    dataSnapshot.children.forEach { child ->
+                        val sensorRecord = child.getValue(dataType)
+                        sensorRecord?.let { values.add(it) }
+                    }
+                    trySend(RemoteResult.Success(values))
+                } catch (e: Exception) {
+                    e.apply {
+                        printStackTrace()
+                        trySend(RemoteResult.Failure(this))
+                    }
                 }
-                trySend(RemoteResult.Success(values))
             }
             
             override fun onCancelled(error: DatabaseError) {
