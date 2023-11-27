@@ -21,8 +21,8 @@ import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModel
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryOf
-import sv.ugm.sensormobile.ui.model.ChartDataUi
 import sv.ugm.sensormobile.ui.util.load
+import sv.ugm.sensormobile.ui.model.ChartSeriesUi
 import sv.ugm.sensormobile.ui.util.rememberChartStyle
 import sv.ugm.sensormobile.ui.util.rememberLegend
 import sv.ugm.sensormobile.ui.util.rememberMarker
@@ -30,14 +30,14 @@ import kotlin.math.roundToInt
 
 @Composable
 fun LineChart(
-    data: ChartDataUi,
     modifier: Modifier = Modifier,
     showLegend: Boolean = true,
+    series: ChartSeriesUi,
     showDataPoint: Boolean = true,
 ) {
-    val chartEntryModelProducer = remember(data) {
+    val chartEntryModelProducer = remember(series) {
         ChartEntryModelProducer(
-            data.datasets.map { dataset ->
+            series.datasets.map { dataset ->
                 dataset.entries.map {
                     entryOf(
                         x = it.xValue,
@@ -48,7 +48,7 @@ fun LineChart(
         )
     }
     
-    val axisValuesOverrider = remember(data) {
+    val axisValuesOverrider = remember(series) {
         object : AxisValuesOverrider<ChartEntryModel> {
             override fun getMaxY(model: ChartEntryModel): Float {
                 return model.maxY + 2f
@@ -60,22 +60,24 @@ fun LineChart(
         }
     }
     
-    val xAxisValueFormatter = remember(data) {
+    val xAxisValueFormatter = remember(series) {
         AxisValueFormatter<AxisPosition.Horizontal.Bottom> { value, _ ->
             val valueIndex = value.toInt()
-            data.xAxisLabelList.getOrNull(valueIndex) ?: value.roundToInt().toString()
+            series.xAxisLabels.getOrNull(valueIndex)
+                ?: value.roundToInt().toString()
         }
     }
     
-    val yAxisValueFormatter = remember(data) {
+    val yAxisValueFormatter = remember(series) {
         AxisValueFormatter<AxisPosition.Vertical.Start> { value, _ ->
             val valueIndex = value.toInt()
-            data.yAxisLabelList.getOrNull(valueIndex) ?: value.roundToInt().toString()
+            series.yAxisLabels.getOrNull(valueIndex)
+                ?: value.roundToInt().toString()
         }
     }
     
-    val xAxisItemPlacer = remember(data) {
-        val maxEntrySize = data.datasets.maxOfOrNull { it.entries.size } ?: 0
+    val xAxisItemPlacer = remember(series) {
+        val maxEntrySize = series.datasets.maxOfOrNull { it.entries.size } ?: 0
         AxisItemPlacer.Horizontal.default(
             spacing = maxEntrySize / 10,
             offset = maxEntrySize / 20,
@@ -92,11 +94,11 @@ fun LineChart(
         valueFormatter = xAxisValueFormatter,
         labelRotationDegrees = 90f,
         itemPlacer = xAxisItemPlacer,
-    ).takeIf { data.datasets.isNotEmpty() }
+    ).takeIf { series.datasets.isNotEmpty() }
     
     val yAxis = rememberStartAxis(
         valueFormatter = yAxisValueFormatter,
-    ).takeIf { data.datasets.isNotEmpty() }
+    ).takeIf { series.datasets.isNotEmpty() }
     
     val marker = rememberMarker(
         labelFormatter = { markedEntries, _ ->
@@ -110,10 +112,12 @@ fun LineChart(
             val yIndex = yValue.toLong()
             
             val x: String =
-                data.datasets.getOrNull(entryIndex)?.entries?.getOrNull(xIndex.toInt())?.xMarkerLabel
+                series.datasets.getOrNull(entryIndex)
+                    ?.entries?.getOrNull(xIndex.toInt())?.xMarkerLabel
                     ?: xValue.toString()
             val y: String =
-                data.datasets.getOrNull(entryIndex)?.entries?.getOrNull(yIndex.toInt())?.yMarkerLabel
+                series.datasets.getOrNull(entryIndex)
+                    ?.entries?.getOrNull(yIndex.toInt())?.yMarkerLabel
                     ?: yValue.toString()
             
             "$x: $y"

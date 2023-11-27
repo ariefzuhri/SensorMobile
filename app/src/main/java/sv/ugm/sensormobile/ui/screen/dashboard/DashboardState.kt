@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import sv.ugm.sensormobile.ui.model.ChartDataUi
+import sv.ugm.sensormobile.ui.model.ChartSeriesUi
 import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
 
 data class DashboardState(
@@ -23,7 +23,7 @@ data class DashboardState(
     
     @StringRes val graphTitle: Int = navDrawerItemList.first().title,
     
-    val chartData: ChartDataUi = ChartDataUi(
+    val chartData: ChartSeriesUi = ChartSeriesUi(
         emptyList(),
         emptyList(),
         emptyList(),

@@ -131,7 +131,7 @@ private fun GraphSection(
     state: DashboardState,
 ) {
     LineChart(
-        data = state.chartData,
+        series = state.chartData,
         showDataPoint = false,
         modifier = Modifier
             .fillMaxSize(),
