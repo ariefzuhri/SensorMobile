@@ -8,9 +8,9 @@ import androidx.compose.material3.Button as MaterialButton
 
 @Composable
 fun Button(
+    modifier: Modifier = Modifier,
     title: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
     MaterialButton(

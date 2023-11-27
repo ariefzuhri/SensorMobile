@@ -15,12 +15,12 @@ import androidx.compose.material3.TextField as MaterialTextField
 
 @Composable
 fun TextField(
+    modifier: Modifier = Modifier,
     label: String,
     placeholder: String,
     leadingIcon: ImageVector,
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Text,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.Sentences,
     imeAction: ImeAction = ImeAction.Done,

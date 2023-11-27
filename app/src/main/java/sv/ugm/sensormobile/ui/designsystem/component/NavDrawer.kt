@@ -23,11 +23,11 @@ import sv.ugm.sensormobile.ui.util.load
 
 @Composable
 fun NavDrawer(
+    modifier: Modifier = Modifier,
     drawerState: DrawerState,
     scope: CoroutineScope,
     itemList: List<NavDrawerItem>,
     onItemSelected: (NavDrawerItem) -> Unit,
-    modifier: Modifier = Modifier,
     gestureEnabled: Boolean = true,
     content: @Composable () -> Unit,
 ) {

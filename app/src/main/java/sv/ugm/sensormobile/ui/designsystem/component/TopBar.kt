@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String,
     menuContDesc: String? = null,
     onMenuClick: (() -> Unit)? = null,
 ) {
