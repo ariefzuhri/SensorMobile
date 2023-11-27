@@ -24,10 +24,10 @@ private val legendPadding = dimensionsOf(top = legendTopPaddingValue)
 @Composable
 fun rememberLegend(
     chartColors: List<Color> = defaultChartColors(),
-    datasetLabels: List<String>,
+    vararg labels: String,
 ): HorizontalLegend? {
     return horizontalLegend(
-        items = datasetLabels.mapIndexed { index, title ->
+        items = labels.mapIndexed { index, title ->
             legendItem(
                 icon = shapeComponent(
                     Shapes.pillShape,
@@ -45,5 +45,5 @@ fun rememberLegend(
         iconPadding = legendItemIconPaddingValue,
         spacing = legendItemSpacing,
         padding = legendPadding,
-    ).takeIf { datasetLabels.isNotEmpty() && chartColors.isNotEmpty() }
+    ).takeIf { labels.isNotEmpty() && chartColors.isNotEmpty() }
 }

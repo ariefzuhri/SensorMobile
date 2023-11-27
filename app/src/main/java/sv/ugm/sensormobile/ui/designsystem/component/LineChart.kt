@@ -21,19 +21,18 @@ import com.patrykandpatrick.vico.core.chart.values.AxisValuesOverrider
 import com.patrykandpatrick.vico.core.entry.ChartEntryModel
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryOf
-import sv.ugm.sensormobile.ui.util.load
+import com.patrykandpatrick.vico.core.legend.Legend
 import sv.ugm.sensormobile.ui.model.ChartSeriesUi
 import sv.ugm.sensormobile.ui.util.rememberChartStyle
-import sv.ugm.sensormobile.ui.util.rememberLegend
 import sv.ugm.sensormobile.ui.util.rememberMarker
 import kotlin.math.roundToInt
 
 @Composable
 fun LineChart(
     modifier: Modifier = Modifier,
-    showLegend: Boolean = true,
     series: ChartSeriesUi,
     showDataPoint: Boolean = true,
+    legend: Legend? = null,
 ) {
     val chartEntryModelProducer = remember(series) {
         ChartEntryModelProducer(
@@ -123,10 +122,6 @@ fun LineChart(
             "$x: $y"
         },
     )
-    
-    val legend = rememberLegend(
-        datasetLabels = data.datasets.map { it.label.load() },
-    ).takeIf { showLegend }
     
     ProvideChartStyle(rememberChartStyle(showDataPoint = showDataPoint)) {
         Chart(

@@ -23,6 +23,7 @@ import sv.ugm.sensormobile.R
 import sv.ugm.sensormobile.ui.designsystem.component.LineChart
 import sv.ugm.sensormobile.ui.designsystem.component.NavDrawer
 import sv.ugm.sensormobile.ui.designsystem.component.TopBar
+import sv.ugm.sensormobile.ui.designsystem.component.chartLegend
 import sv.ugm.sensormobile.ui.util.CONTAINER_PADDING_DP
 import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
 import sv.ugm.sensormobile.ui.util.LockScreenOrientation
@@ -130,9 +131,13 @@ private fun DashboardContent(
 private fun GraphSection(
     state: DashboardState,
 ) {
+    val chartLegend = chartLegend(
+        state.graphTitle.load(),
+    )
     LineChart(
         series = state.chartData,
         showDataPoint = false,
+        legend = chartLegend,
         modifier = Modifier
             .fillMaxSize(),
     )
