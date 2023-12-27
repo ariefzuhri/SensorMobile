@@ -8,17 +8,17 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import sv.ugm.sensormobile.domain.usecase.CheckLoginSessionUseCase
-import sv.ugm.sensormobile.domain.usecase.GetSensorRecordsUseCase
+import sv.ugm.sensormobile.domain.usecase.GetSensorDataUseCase
 import sv.ugm.sensormobile.domain.util.Result
-import sv.ugm.sensormobile.domain.util.SensorType
-import sv.ugm.sensormobile.ui.mapper.SensorRecordDataMapper
+import sv.ugm.sensormobile.domain.util.SensorDataType
+import sv.ugm.sensormobile.ui.mapper.SensorOutputUiMapper
 import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val checkLoginSessionUseCase: CheckLoginSessionUseCase,
-    private val getSensorRecordsUseCase: GetSensorRecordsUseCase,
-    private val mapper: SensorRecordDataMapper,
+    private val getSensorDataUseCase: GetSensorDataUseCase,
+    private val mapper: SensorOutputUiMapper,
 ) : ViewModel() {
     
     private val _state = mutableStateOf(DashboardState())
@@ -26,16 +26,16 @@ class DashboardViewModel @Inject constructor(
     
     init {
         checkLoginSession()
-        getSensorRecords(
-            sensorType = _state.value.navDrawerItemList.first().sensorType,
+        getSensorData(
+            sensorDataType = _state.value.navDrawerItemList.first().sensorDataType,
         )
     }
     
     fun onEvent(event: DashboardEvent) {
         when (event) {
-            is DashboardEvent.OnSensorTypeSelected -> {
-                getSensorRecords(
-                    sensorType = event.sensorType,
+            is DashboardEvent.OnSensorDataTypeSelected -> {
+                getSensorData(
+                    sensorDataType = event.sensorDataType,
                 )
             }
         }
@@ -57,30 +57,30 @@ class DashboardViewModel @Inject constructor(
         }
     }
     
-    private fun getSensorRecords(
-        sensorType: SensorType,
+    private fun getSensorData(
+        sensorDataType: SensorDataType,
     ) {
         viewModelScope.launch {
-            getSensorRecordsUseCase(
-                sensorType = sensorType,
+            getSensorDataUseCase(
+                sensorDataType = sensorDataType,
             ).collect { result ->
-                @StringRes val sensorRecordName = _state.value.navDrawerItemList
-                    .first { it.sensorType == sensorType }.title
+                @StringRes val sensorDataName = _state.value.navDrawerItemList
+                    .first { it.sensorDataType == sensorDataType }.title
                 
                 when (result) {
                     is Result.Loading -> {
                         _state.value = _state.value.copy(
-                            graphTitle = sensorRecordName,
+                            chartTitle = sensorDataName,
                             isLoading = true,
                         )
                     }
                     
                     is Result.Success -> {
                         _state.value = _state.value.copy(
-                            graphTitle = sensorRecordName,
+                            chartTitle = sensorDataName,
                             chartData = mapper.mapDomainToUi(
                                 input = result.data,
-                                label = sensorRecordName,
+                                label = sensorDataName,
                             ),
                             isLoading = false,
                         )
@@ -88,7 +88,7 @@ class DashboardViewModel @Inject constructor(
                     
                     is Result.Failure -> {
                         _state.value = _state.value.copy(
-                            graphTitle = sensorRecordName,
+                            chartTitle = sensorDataName,
                             isLoading = false,
                             failureMessage = mutableStateOf(result.message),
                         )

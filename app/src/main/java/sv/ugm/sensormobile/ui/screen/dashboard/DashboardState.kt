@@ -11,17 +11,17 @@ data class DashboardState(
     val isLoggedIn: Boolean? = null,
     
     @Stable val navDrawerItemList: List<DashboardNavDrawerItem> = listOf(
-        DashboardNavDrawerItem.PhotodetectorGraph,
-        DashboardNavDrawerItem.SoilMoistureGraph,
-        DashboardNavDrawerItem.AirQualityGraph,
-        DashboardNavDrawerItem.RainfallGraph,
-        DashboardNavDrawerItem.AirHumidityGraph,
-        DashboardNavDrawerItem.TemperatureGraph,
-        DashboardNavDrawerItem.PressureGraph,
-        DashboardNavDrawerItem.AltitudeGraph,
+        DashboardNavDrawerItem.LightChart,
+        DashboardNavDrawerItem.SoilMoistureChart,
+        DashboardNavDrawerItem.AirQualityChart,
+        DashboardNavDrawerItem.RaindropChart,
+        DashboardNavDrawerItem.HumidityChart,
+        DashboardNavDrawerItem.Temperature1Chart,
+        DashboardNavDrawerItem.PressureChart,
+        DashboardNavDrawerItem.ApproxAltitudeChart,
     ),
     
-    @StringRes val graphTitle: Int = navDrawerItemList.first().title,
+    @StringRes val chartTitle: Int = navDrawerItemList.first().title,
     
     val chartData: ChartSeriesUi = ChartSeriesUi(
         emptyList(),

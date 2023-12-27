@@ -2,7 +2,7 @@ package sv.ugm.sensormobile.data.source.remote.dto
 
 import com.google.firebase.database.PropertyName
 
-data class SensorRecordSnapshot(
+data class SensorOutputSnapshot(
     
     @PropertyName("AirQuality")
     val airQuality: Any? = null,
@@ -24,6 +24,9 @@ data class SensorRecordSnapshot(
     
     @PropertyName("RainDrop")
     val rainDrop: Any? = null,
+    
+    @PropertyName("T")
+    val t: Any? = null,
     
     @PropertyName("Temperature")
     val temperature: Any? = null,

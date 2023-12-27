@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import sv.ugm.sensormobile.data.repository.AuthRepository
-import sv.ugm.sensormobile.data.repository.SensorRecordRepository
+import sv.ugm.sensormobile.data.repository.SensorOutputRepository
 import sv.ugm.sensormobile.domain.repository.IAuthRepository
-import sv.ugm.sensormobile.domain.repository.ISensorRecordRepository
+import sv.ugm.sensormobile.domain.repository.ISensorOutputRepository
 
 @Module(
     includes = [
@@ -25,8 +25,8 @@ abstract class RepositoryModule {
     ): IAuthRepository
     
     @Binds
-    abstract fun provideSensorRecordRepository(
-        sensorRecordRepository: SensorRecordRepository,
-    ): ISensorRecordRepository
+    abstract fun provideSensorOutputRepository(
+        sensorOutputRepository: SensorOutputRepository,
+    ): ISensorOutputRepository
     
 }

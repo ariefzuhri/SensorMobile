@@ -91,7 +91,7 @@ private fun DashboardContent(
             TopBar(
                 title = stringResource(
                     id = R.string.txt_title_dashboard,
-                    state.graphTitle.load(),
+                    state.chartTitle.load(),
                 ),
                 menuContDesc = R.string.btn_cd_menu_topbar_dashboard.load(),
                 onMenuClick = {
@@ -109,8 +109,8 @@ private fun DashboardContent(
             itemList = state.navDrawerItemList,
             onItemSelected = { item ->
                 viewModel.onEvent(
-                    DashboardEvent.OnSensorTypeSelected(
-                        sensorType = (item as DashboardNavDrawerItem).sensorType,
+                    DashboardEvent.OnSensorDataTypeSelected(
+                        sensorDataType = (item as DashboardNavDrawerItem).sensorDataType,
                     )
                 )
             },
@@ -121,18 +121,18 @@ private fun DashboardContent(
                 modifier = Modifier
                     .padding(CONTAINER_PADDING_DP.dp),
             ) {
-                GraphSection(state)
+                ChartSection(state)
             }
         }
     }
 }
 
 @Composable
-private fun GraphSection(
+private fun ChartSection(
     state: DashboardState,
 ) {
     val chartLegend = chartLegend(
-        state.graphTitle.load(),
+        state.chartTitle.load(),
     )
     LineChart(
         series = state.chartData,

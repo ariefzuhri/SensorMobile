@@ -1,7 +1,7 @@
 package sv.ugm.sensormobile.ui.mapper
 
 import androidx.annotation.StringRes
-import sv.ugm.sensormobile.domain.model.SensorRecord
+import sv.ugm.sensormobile.domain.model.SensorData
 import sv.ugm.sensormobile.domain.util.Constants
 import sv.ugm.sensormobile.domain.util.toDateTimeString
 import sv.ugm.sensormobile.ui.model.ChartSeriesUi
@@ -9,10 +9,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SensorRecordDataMapper @Inject constructor() {
+class SensorOutputUiMapper @Inject constructor() {
     
     fun mapDomainToUi(
-        input: List<SensorRecord>,
+        input: List<SensorData>,
         @StringRes label: Int,
     ): ChartSeriesUi {
         val chartEntries = mutableListOf<ChartSeriesUi.ChartEntry>()

@@ -1,6 +1,6 @@
 package sv.ugm.sensormobile.domain.model
 
-data class SensorRecord(
+data class SensorData(
     val value: Float,
     val timestampMillis: Long,
 )

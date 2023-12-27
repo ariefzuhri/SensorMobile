@@ -1,11 +1,11 @@
 package sv.ugm.sensormobile.ui.screen.dashboard
 
-import sv.ugm.sensormobile.domain.util.SensorType
+import sv.ugm.sensormobile.domain.util.SensorDataType
 
 sealed class DashboardEvent {
     
-    data class OnSensorTypeSelected(
-        val sensorType: SensorType,
+    data class OnSensorDataTypeSelected(
+        val sensorDataType: SensorDataType,
     ) : DashboardEvent()
     
 }

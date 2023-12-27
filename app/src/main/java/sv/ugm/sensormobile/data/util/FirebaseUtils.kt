@@ -18,8 +18,8 @@ suspend fun <T : Any> DatabaseReference.addValueEventListenerFlow(
                 try {
                     val values = mutableListOf<T>()
                     dataSnapshot.children.forEach { child ->
-                        val sensorRecord = child.getValue(dataType)
-                        sensorRecord?.let { values.add(it) }
+                        val data = child.getValue(dataType)
+                        data?.let { values.add(it) }
                     }
                     trySend(RemoteResult.Success(values))
                 } catch (e: Exception) {
