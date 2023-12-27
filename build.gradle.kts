@@ -22,7 +22,7 @@ val desugarJdkLibsVersion by extra { "2.0.3" }
 val composeVersion by extra { "2023.10.01" }
 val composeCompilerVersion by extra { "1.5.3" }
 
-val navigationVersion by extra { "2.7.5" }
+val navigationVersion by extra { "2.7.6" }
 
 val hiltVersion by extra { "2.48.1" }
 val hiltNavigationComposeVersion by extra { "1.1.0" }
