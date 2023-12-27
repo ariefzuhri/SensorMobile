@@ -13,7 +13,7 @@ plugins {
     id("com.google.dagger.hilt.android") version hiltVersion apply false
 }
 
-val activityVersion by extra { "1.8.0" }
+val activityVersion by extra { "1.8.2" }
 val coreVersion by extra { "1.12.0" }
 val lifecycleVersion by extra { "2.6.2" }
 
