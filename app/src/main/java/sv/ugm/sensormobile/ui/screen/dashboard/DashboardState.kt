@@ -17,6 +17,7 @@ data class DashboardState(
         DashboardNavDrawerItem.RaindropChart,
         DashboardNavDrawerItem.HumidityChart,
         DashboardNavDrawerItem.Temperature1Chart,
+        DashboardNavDrawerItem.Temperature2Chart,
         DashboardNavDrawerItem.PressureChart,
         DashboardNavDrawerItem.ApproxAltitudeChart,
     ),

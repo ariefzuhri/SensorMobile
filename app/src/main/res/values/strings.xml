@@ -9,6 +9,7 @@
     <string name="menu_raindrop_chart_dashboard">Curah Hujan</string>
     <string name="menu_humidity_chart_dashboard">Kelembapan Udara</string>
     <string name="menu_temperature_1_chart_dashboard">Temperatur 1</string>
+    <string name="menu_temperature_2_chart_dashboard">Temperatur 2</string>
     <string name="menu_pressure_chart_dashboard">Tekanan Udara</string>
     <string name="menu_approx_altitude_chart_dashboard">Approx Altitude</string>
 

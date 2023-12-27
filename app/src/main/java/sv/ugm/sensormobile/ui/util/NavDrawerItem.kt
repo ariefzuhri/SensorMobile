@@ -77,4 +77,10 @@ sealed class DashboardNavDrawerItem(
         sensorDataType = SensorDataType.Temperature1,
     )
     
+    data object Temperature2Chart : DashboardNavDrawerItem(
+        title = R.string.menu_temperature_2_chart_dashboard,
+        icon = Icons.Rounded.Thermostat,
+        sensorDataType = SensorDataType.Temperature2,
+    )
+    
 }
