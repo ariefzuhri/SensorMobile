@@ -6,7 +6,7 @@ object Constants {
         
         object Raw {
             
-            const val TIMESTAMPS = "yyyy-MM-dd,HH:mm:ss"
+            const val TIMESTAMPS = "yyyy-MM-dd HH:mm:ss"
             
         }
         
