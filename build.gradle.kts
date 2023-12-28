@@ -30,7 +30,7 @@ val hiltNavigationComposeVersion by extra { "1.1.0" }
 val dataStoreVersion by extra { "1.0.0" }
 
 val retrofitVersion by extra { "2.9.0" }
-val moshiVersion by extra { "1.14.0" }
+val moshiVersion by extra { "1.15.0" }
 val chuckerVersion by extra { "4.0.0" }
 
 val vicoVersion by extra { "1.12.0" }
