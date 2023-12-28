@@ -92,6 +92,7 @@ dependencies {
     val retrofitVersion: String by rootProject.extra
     val moshiVersion: String by rootProject.extra
     val chuckerVersion: String by rootProject.extra
+    val leakCanaryVersion: String by rootProject.extra
     val vicoVersion: String by rootProject.extra
     val junitVersion: String by rootProject.extra
     val junitExtVersion: String by rootProject.extra
@@ -135,6 +136,9 @@ dependencies {
     // Chucker - HTTP inspector
     debugImplementation("com.github.chuckerteam.chucker:library:$chuckerVersion")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
+    
+    // LeakCanary - memory leak detection
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")
     
     // Vico - charting
     implementation("com.patrykandpatrick.vico:compose-m3:$vicoVersion")

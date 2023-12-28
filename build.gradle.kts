@@ -33,6 +33,8 @@ val retrofitVersion by extra { "2.9.0" }
 val moshiVersion by extra { "1.15.0" }
 val chuckerVersion by extra { "4.0.0" }
 
+val leakCanaryVersion by extra { "2.12" }
+
 val vicoVersion by extra { "1.12.0" }
 
 val junitVersion by extra { "4.13.2" }
