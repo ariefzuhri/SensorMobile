@@ -42,6 +42,20 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            
+            versionNameSuffix = "-dev"
+        }
+        
+        create("alpha") {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+            
+            isDebuggable = false
+            signingConfig = signingConfigs.getByName("debug")
+            versionNameSuffix = "-alpha"
         }
     }
     
@@ -135,6 +149,7 @@ dependencies {
     
     // Chucker - HTTP inspector
     debugImplementation("com.github.chuckerteam.chucker:library:$chuckerVersion")
+    alphaImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
     
     // LeakCanary - memory leak detection
@@ -155,4 +170,11 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     
+}
+
+fun DependencyHandler.alphaImplementation(dependencyNotation: Any): Dependency? {
+    return add(
+        "alphaImplementation",
+        dependencyNotation,
+    )
 }
