@@ -12,7 +12,7 @@ import sv.ugm.sensormobile.domain.repository.ISensorOutputRepository
 @Module(
     includes = [
         DataStoreModule::class,
-        FirebaseModule::class,
+        NetworkModule::class,
     ],
 )
 @InstallIn(SingletonComponent::class)

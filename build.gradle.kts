@@ -3,13 +3,13 @@ plugins {
     val gradleVersion = "8.1.2"
     val kotlinVersion = "1.9.10"
     val kspVersion = "1.9.10-1.0.13"
-    val googleServicesVersion = "4.4.0"
+    val secretsGradlePluginVersion = "2.0.1"
     val hiltVersion = "2.48.1"
     
     id("com.android.application") version gradleVersion apply false
     id("org.jetbrains.kotlin.android") version kotlinVersion apply false
     id("com.google.devtools.ksp") version kspVersion apply false
-    id("com.google.gms.google-services") version googleServicesVersion apply false
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version secretsGradlePluginVersion apply false
     id("com.google.dagger.hilt.android") version hiltVersion apply false
 }
 
@@ -29,7 +29,9 @@ val hiltNavigationComposeVersion by extra { "1.1.0" }
 
 val dataStoreVersion by extra { "1.0.0" }
 
-val firebaseVersion by extra { "32.5.0" }
+val retrofitVersion by extra { "2.9.0" }
+val moshiVersion by extra { "1.14.0" }
+val chuckerVersion by extra { "4.0.0" }
 
 val vicoVersion by extra { "1.12.0" }
 

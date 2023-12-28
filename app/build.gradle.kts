@@ -3,8 +3,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
     
 }
 
@@ -57,6 +57,7 @@ android {
     }
     
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     
@@ -69,6 +70,10 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    
+    secrets {
+        propertiesFileName = "secrets.properties"
     }
     
 }
@@ -84,7 +89,9 @@ dependencies {
     val hiltVersion: String by rootProject.extra
     val hiltNavigationComposeVersion: String by rootProject.extra
     val dataStoreVersion: String by rootProject.extra
-    val firebaseVersion: String by rootProject.extra
+    val retrofitVersion: String by rootProject.extra
+    val moshiVersion: String by rootProject.extra
+    val chuckerVersion: String by rootProject.extra
     val vicoVersion: String by rootProject.extra
     val junitVersion: String by rootProject.extra
     val junitExtVersion: String by rootProject.extra
@@ -117,9 +124,17 @@ dependencies {
     // Preferences DataStore - persistent storage
     implementation("androidx.datastore:datastore-preferences:$dataStoreVersion")
     
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:$firebaseVersion"))
-    implementation("com.google.firebase:firebase-database")
+    // Retrofit - REST client
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
+    
+    // Moshi - JSON parser
+    implementation("com.squareup.moshi:moshi:$moshiVersion")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+    
+    // Chucker - HTTP inspector
+    debugImplementation("com.github.chuckerteam.chucker:library:$chuckerVersion")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
     
     // Vico - charting
     implementation("com.patrykandpatrick.vico:compose-m3:$vicoVersion")

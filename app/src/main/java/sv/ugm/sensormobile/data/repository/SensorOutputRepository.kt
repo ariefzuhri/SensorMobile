@@ -3,7 +3,7 @@ package sv.ugm.sensormobile.data.repository
 import kotlinx.coroutines.flow.Flow
 import sv.ugm.sensormobile.data.mapper.SensorOutputDataMapper
 import sv.ugm.sensormobile.data.source.remote.SensorOutputRemoteDataSource
-import sv.ugm.sensormobile.data.source.remote.dto.SensorOutputSnapshot
+import sv.ugm.sensormobile.data.source.remote.dto.SensorOutputResponse
 import sv.ugm.sensormobile.data.util.RemoteResource
 import sv.ugm.sensormobile.data.util.RemoteResult
 import sv.ugm.sensormobile.domain.model.SensorOutput
@@ -19,12 +19,12 @@ class SensorOutputRepository @Inject constructor(
 ) : ISensorOutputRepository {
     
     override suspend fun getSensorOutput(): Flow<Result<List<SensorOutput>>> {
-        return object : RemoteResource<List<SensorOutputSnapshot>, List<SensorOutput>>() {
-            override suspend fun createCall(): Flow<RemoteResult<List<SensorOutputSnapshot>>> {
+        return object : RemoteResource<SensorOutputResponse, List<SensorOutput>>() {
+            override suspend fun createCall(): Flow<RemoteResult<SensorOutputResponse>> {
                 return remoteDataSource.getSensorOutput()
             }
             
-            override suspend fun onFetchSuccess(data: List<SensorOutputSnapshot>): List<SensorOutput> {
+            override suspend fun onFetchSuccess(data: SensorOutputResponse): List<SensorOutput> {
                 return dataMapper.mapDataToDomain(
                     input = data,
                 )
