@@ -2,18 +2,18 @@
 
     <string name="app_name">Sensor Mobile</string>
 
-    <string name="btn_cd_menu_topbar_dashboard">Menu</string>
-    <string name="menu_light_chart_dashboard">Pencahayaan</string>
-    <string name="menu_soil_moisture_chart_dashboard">Kelembapan Tanah</string>
-    <string name="menu_air_quality_chart_dashboard">Kualitas Udara</string>
-    <string name="menu_raindrop_chart_dashboard">Curah Hujan</string>
-    <string name="menu_humidity_chart_dashboard">Kelembapan Udara</string>
-    <string name="menu_temperature_1_chart_dashboard">Temperatur 1</string>
-    <string name="menu_temperature_2_chart_dashboard">Temperatur 2</string>
-    <string name="menu_pressure_chart_dashboard">Tekanan Udara</string>
-    <string name="menu_approx_altitude_chart_dashboard">Approx Altitude</string>
+    <string name="txt_title_chart">Grafik %1$s</string>
+    <string name="btn_cd_menu_topbar_chart">Menu</string>
+    <string name="menu_light_chart">Pencahayaan</string>
+    <string name="menu_soil_moisture_chart">Kelembapan Tanah</string>
+    <string name="menu_air_quality_chart">Kualitas Udara</string>
+    <string name="menu_raindrop_chart">Curah Hujan</string>
+    <string name="menu_humidity_chart">Kelembapan Udara</string>
+    <string name="menu_temperature_1_chart">Temperatur 1</string>
+    <string name="menu_temperature_2_chart">Temperatur 2</string>
+    <string name="menu_pressure_chart">Tekanan Udara</string>
+    <string name="menu_approx_altitude_chart">Approx Altitude</string>
 
-    <string name="txt_title_dashboard">Grafik %1$s</string>
     <string name="txt_title_login">Login</string>
     <string name="tf_label_email_login">Email</string>
     <string name="tf_placeholder_email_login">Masukkan email</string>

@@ -1,4 +1,4 @@
-package sv.ugm.sensormobile.ui.screen.dashboard
+package sv.ugm.sensormobile.ui.screen.chart
 
 import android.content.pm.ActivityInfo
 import androidx.activity.compose.BackHandler
@@ -24,23 +24,23 @@ import sv.ugm.sensormobile.ui.designsystem.component.LineChart
 import sv.ugm.sensormobile.ui.designsystem.component.NavDrawer
 import sv.ugm.sensormobile.ui.designsystem.component.TopBar
 import sv.ugm.sensormobile.ui.designsystem.component.chartLegend
+import sv.ugm.sensormobile.ui.util.ChartNavDrawerItem
 import sv.ugm.sensormobile.ui.util.CONTAINER_PADDING_DP
-import sv.ugm.sensormobile.ui.util.DashboardNavDrawerItem
 import sv.ugm.sensormobile.ui.util.LockScreenOrientation
 import sv.ugm.sensormobile.ui.util.asToast
 import sv.ugm.sensormobile.ui.util.load
 
 @Composable
-fun DashboardScreen(
+fun ChartScreen(
     navigateToLogin: () -> Unit,
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     scope: CoroutineScope = rememberCoroutineScope(),
-    viewModel: DashboardViewModel = hiltViewModel(),
+    viewModel: ChartViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
     
     if (state.isLoggedIn == true) {
-        DashboardContent(
+        ChartContent(
             drawerState = drawerState,
             scope = scope,
             state = state,
@@ -69,7 +69,7 @@ fun DashboardScreen(
 
 @Composable
 fun CheckLoginSession(
-    state: DashboardState,
+    state: ChartState,
     navigateToLogin: () -> Unit,
 ) {
     LaunchedEffect(state.isLoggedIn) {
@@ -80,20 +80,20 @@ fun CheckLoginSession(
 }
 
 @Composable
-private fun DashboardContent(
+private fun ChartContent(
     drawerState: DrawerState,
     scope: CoroutineScope,
-    state: DashboardState,
-    viewModel: DashboardViewModel,
+    state: ChartState,
+    viewModel: ChartViewModel,
 ) {
     Scaffold(
         topBar = {
             TopBar(
                 title = stringResource(
-                    id = R.string.txt_title_dashboard,
+                    id = R.string.txt_title_chart,
                     state.chartTitle.load(),
                 ),
-                menuContDesc = R.string.btn_cd_menu_topbar_dashboard.load(),
+                menuContDesc = R.string.btn_cd_menu_topbar_chart.load(),
                 onMenuClick = {
                     scope.launch {
                         if (drawerState.isOpen) drawerState.close()
@@ -109,8 +109,8 @@ private fun DashboardContent(
             itemList = state.navDrawerItemList,
             onItemSelected = { item ->
                 viewModel.onEvent(
-                    DashboardEvent.OnSensorDataTypeSelected(
-                        sensorDataType = (item as DashboardNavDrawerItem).sensorDataType,
+                    ChartEvent.OnSensorDataTypeSelected(
+                        sensorDataType = (item as ChartNavDrawerItem).sensorDataType,
                     )
                 )
             },
@@ -129,7 +129,7 @@ private fun DashboardContent(
 
 @Composable
 private fun ChartSection(
-    state: DashboardState,
+    state: ChartState,
 ) {
     val chartLegend = chartLegend(
         state.chartTitle.load(),

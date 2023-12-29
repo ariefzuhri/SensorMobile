@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import sv.ugm.sensormobile.ui.screen.dashboard.DashboardScreen
+import sv.ugm.sensormobile.ui.screen.chart.ChartScreen
 import sv.ugm.sensormobile.ui.screen.login.LoginScreen
 
 @Composable
@@ -15,11 +15,11 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Dashboard.route,
+        startDestination = Screen.Chart.route,
         modifier = modifier,
     ) {
-        composable(Screen.Dashboard.route) {
-            DashboardScreen(
+        composable(Screen.Chart.route) {
+            ChartScreen(
                 navigateToLogin = {
                     navController.navigate(Screen.Login.route) {
                         popUpTo(navController.graph.id) {
@@ -33,7 +33,7 @@ fun NavGraph(
         composable(Screen.Login.route) {
             LoginScreen(
                 restartApp = {
-                    navController.navigate(Screen.Dashboard.route) {
+                    navController.navigate(Screen.Chart.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }

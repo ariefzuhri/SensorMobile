@@ -1,4 +1,4 @@
-package sv.ugm.sensormobile.ui.screen.dashboard
+package sv.ugm.sensormobile.ui.screen.chart
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.State
@@ -15,14 +15,14 @@ import sv.ugm.sensormobile.ui.mapper.SensorOutputUiMapper
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
+class ChartViewModel @Inject constructor(
     private val checkLoginSessionUseCase: CheckLoginSessionUseCase,
     private val getSensorDataUseCase: GetSensorDataUseCase,
     private val mapper: SensorOutputUiMapper,
 ) : ViewModel() {
     
-    private val _state = mutableStateOf(DashboardState())
-    val state: State<DashboardState> get() = _state
+    private val _state = mutableStateOf(ChartState())
+    val state: State<ChartState> get() = _state
     
     init {
         checkLoginSession()
@@ -31,9 +31,9 @@ class DashboardViewModel @Inject constructor(
         )
     }
     
-    fun onEvent(event: DashboardEvent) {
+    fun onEvent(event: ChartEvent) {
         when (event) {
-            is DashboardEvent.OnSensorDataTypeSelected -> {
+            is ChartEvent.OnSensorDataTypeSelected -> {
                 getSensorData(
                     sensorDataType = event.sensorDataType,
                 )

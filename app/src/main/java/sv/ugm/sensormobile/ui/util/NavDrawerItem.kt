@@ -23,62 +23,62 @@ sealed interface NavDrawerItem {
     
 }
 
-sealed class DashboardNavDrawerItem(
+sealed class ChartNavDrawerItem(
     override val title: Int,
     override val icon: ImageVector,
     val sensorDataType: SensorDataType,
 ) : NavDrawerItem {
     
-    data object AirQualityChart : DashboardNavDrawerItem(
-        title = R.string.menu_air_quality_chart_dashboard,
+    data object AirQualityChart : ChartNavDrawerItem(
+        title = R.string.menu_air_quality_chart,
         icon = Icons.Rounded.Air,
         sensorDataType = SensorDataType.AirQuality,
     )
     
-    data object ApproxAltitudeChart : DashboardNavDrawerItem(
-        title = R.string.menu_approx_altitude_chart_dashboard,
+    data object ApproxAltitudeChart : ChartNavDrawerItem(
+        title = R.string.menu_approx_altitude_chart,
         icon = Icons.Rounded.Landscape,
         sensorDataType = SensorDataType.ApproxAltitude,
     )
     
-    data object HumidityChart : DashboardNavDrawerItem(
-        title = R.string.menu_humidity_chart_dashboard,
+    data object HumidityChart : ChartNavDrawerItem(
+        title = R.string.menu_humidity_chart,
         icon = Icons.Rounded.InvertColors,
         sensorDataType = SensorDataType.Humidity,
     )
     
-    data object LightChart : DashboardNavDrawerItem(
-        title = R.string.menu_light_chart_dashboard,
+    data object LightChart : ChartNavDrawerItem(
+        title = R.string.menu_light_chart,
         icon = Icons.Rounded.LightMode,
         sensorDataType = SensorDataType.LightData,
     )
     
-    data object PressureChart : DashboardNavDrawerItem(
-        title = R.string.menu_pressure_chart_dashboard,
+    data object PressureChart : ChartNavDrawerItem(
+        title = R.string.menu_pressure_chart,
         icon = Icons.Rounded.Compress,
         sensorDataType = SensorDataType.PressureData,
     )
     
-    data object RaindropChart : DashboardNavDrawerItem(
-        title = R.string.menu_raindrop_chart_dashboard,
+    data object RaindropChart : ChartNavDrawerItem(
+        title = R.string.menu_raindrop_chart,
         icon = Icons.Rounded.WaterDrop,
         sensorDataType = SensorDataType.Raindrop,
     )
     
-    data object SoilMoistureChart : DashboardNavDrawerItem(
-        title = R.string.menu_soil_moisture_chart_dashboard,
+    data object SoilMoistureChart : ChartNavDrawerItem(
+        title = R.string.menu_soil_moisture_chart,
         icon = Icons.Rounded.Eco,
         sensorDataType = SensorDataType.SoilMoistureData,
     )
     
-    data object Temperature1Chart : DashboardNavDrawerItem(
-        title = R.string.menu_temperature_1_chart_dashboard,
+    data object Temperature1Chart : ChartNavDrawerItem(
+        title = R.string.menu_temperature_1_chart,
         icon = Icons.Rounded.Thermostat,
         sensorDataType = SensorDataType.Temperature1,
     )
     
-    data object Temperature2Chart : DashboardNavDrawerItem(
-        title = R.string.menu_temperature_2_chart_dashboard,
+    data object Temperature2Chart : ChartNavDrawerItem(
+        title = R.string.menu_temperature_2_chart,
         icon = Icons.Rounded.Thermostat,
         sensorDataType = SensorDataType.Temperature2,
     )
