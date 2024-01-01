@@ -3,9 +3,9 @@ package sv.ugm.sensormobile.data.source.local
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
-import sv.ugm.sensormobile.data.source.local.provider.LoginSessionDataStore
-import sv.ugm.sensormobile.data.source.local.provider.UserData
+import sv.ugm.sensormobile.data.source.local.provider.datastore.LoginSessionDataStore
+import sv.ugm.sensormobile.data.source.local.provider.datastore.model.LoginSessionPreference
+import sv.ugm.sensormobile.data.source.local.provider.statics.UserData
 import sv.ugm.sensormobile.data.util.LocalResult
 import javax.inject.Inject
 import javax.inject.Singleton

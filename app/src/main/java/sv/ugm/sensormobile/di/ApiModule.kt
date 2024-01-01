@@ -16,11 +16,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object ApiModule {
     
     @Singleton
     @Provides
-    fun provideChuckerInterceptor(application: Application): ChuckerInterceptor {
+    fun provideChuckerInterceptor(
+        application: Application,
+    ): ChuckerInterceptor {
         return ChuckerInterceptor.Builder(application)
             .build()
     }

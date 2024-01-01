@@ -18,8 +18,8 @@ class GetSensorDataUseCase @Inject constructor(
     ): Flow<Result<List<SensorData>>> {
         return sensorOutputRepository.getSensorOutput()
             .map { result ->
-                result.mapWhenSuccess { sensorOutput ->
-                    sensorOutput
+                result.mapWhenSuccess { sensorOutputs ->
+                    sensorOutputs
                         .map {
                             SensorData(
                                 value = when (sensorDataType) {
@@ -35,7 +35,6 @@ class GetSensorDataUseCase @Inject constructor(
                                 },
                                 timestampMillis = it.timestampMillis,
                             )
-                            
                         }
                         .sortedBy {
                             it.timestampMillis

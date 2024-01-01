@@ -1,6 +1,6 @@
-package sv.ugm.sensormobile.data.source.local.provider
+package sv.ugm.sensormobile.data.source.local.provider.statics
 
-import sv.ugm.sensormobile.data.source.local.model.UserStatic
+import sv.ugm.sensormobile.data.source.local.provider.statics.model.UserStatic
 import javax.inject.Inject
 import javax.inject.Singleton
 

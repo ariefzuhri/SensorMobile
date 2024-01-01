@@ -1,6 +1,6 @@
 package sv.ugm.sensormobile.data.mapper
 
-import sv.ugm.sensormobile.data.source.remote.dto.SensorOutputResponse
+import sv.ugm.sensormobile.data.source.remote.api.response.SensorOutputsResponse
 import sv.ugm.sensormobile.domain.model.SensorOutput
 import sv.ugm.sensormobile.domain.util.Constants
 import sv.ugm.sensormobile.domain.util.toFloatOrZero
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class SensorOutputDataMapper @Inject constructor() {
     
     fun mapDataToDomain(
-        input: SensorOutputResponse,
+        input: SensorOutputsResponse,
     ): List<SensorOutput> {
         return input.data?.map {
             mapDataToDomain(
@@ -22,7 +22,7 @@ class SensorOutputDataMapper @Inject constructor() {
     }
     
     private fun mapDataToDomain(
-        input: SensorOutputResponse.DataItem?,
+        input: SensorOutputsResponse.DataItem?,
     ): SensorOutput {
         return SensorOutput(
             airQuality = input?.airQuality.toFloatOrZero(),

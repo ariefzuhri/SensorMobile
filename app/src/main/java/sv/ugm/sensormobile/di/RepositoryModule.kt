@@ -11,12 +11,11 @@ import sv.ugm.sensormobile.domain.repository.ISensorOutputRepository
 
 @Module(
     includes = [
+        ApiModule::class,
         DataStoreModule::class,
-        NetworkModule::class,
     ],
 )
 @InstallIn(SingletonComponent::class)
-@Suppress("unused")
 abstract class RepositoryModule {
     
     @Binds

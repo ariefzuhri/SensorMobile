@@ -1,6 +1,6 @@
 package sv.ugm.sensormobile.domain.util
 
-suspend fun <T : Any, R : Any> Result<T>.mapWhenSuccess(
+suspend fun <T, R> Result<T>.mapWhenSuccess(
     transform: suspend (value: T) -> R,
 ): Result<R> {
     return when (this) {

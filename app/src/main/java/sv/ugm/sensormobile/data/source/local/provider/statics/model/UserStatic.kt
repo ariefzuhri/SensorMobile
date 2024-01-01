@@ -1,4 +1,4 @@
-package sv.ugm.sensormobile.data.source.local.model
+package sv.ugm.sensormobile.data.source.local.provider.statics.model
 
 data class UserStatic(
     val id: Int,

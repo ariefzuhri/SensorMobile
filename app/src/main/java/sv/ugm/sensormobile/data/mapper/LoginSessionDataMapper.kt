@@ -1,6 +1,6 @@
 package sv.ugm.sensormobile.data.mapper
 
-import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
+import sv.ugm.sensormobile.data.source.local.provider.datastore.model.LoginSessionPreference
 import sv.ugm.sensormobile.domain.model.LoginSession
 import javax.inject.Inject
 import javax.inject.Singleton

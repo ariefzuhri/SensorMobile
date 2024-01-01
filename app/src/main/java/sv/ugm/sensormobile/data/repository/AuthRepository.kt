@@ -3,7 +3,7 @@ package sv.ugm.sensormobile.data.repository
 import kotlinx.coroutines.flow.Flow
 import sv.ugm.sensormobile.data.mapper.LoginSessionDataMapper
 import sv.ugm.sensormobile.data.source.local.AuthLocalDataSource
-import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
+import sv.ugm.sensormobile.data.source.local.provider.datastore.model.LoginSessionPreference
 import sv.ugm.sensormobile.data.util.LocalResource
 import sv.ugm.sensormobile.data.util.LocalResult
 import sv.ugm.sensormobile.domain.model.LoginSession

@@ -1,4 +1,4 @@
-package sv.ugm.sensormobile.data.source.local.provider
+package sv.ugm.sensormobile.data.source.local.provider.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import sv.ugm.sensormobile.data.source.local.model.LoginSessionPreference
+import sv.ugm.sensormobile.data.source.local.provider.datastore.model.LoginSessionPreference
 import javax.inject.Inject
 import javax.inject.Singleton
 
