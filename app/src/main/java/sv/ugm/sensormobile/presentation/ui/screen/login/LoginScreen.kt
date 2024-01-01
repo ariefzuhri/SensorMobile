@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Email
-import androidx.compose.material.icons.rounded.Password
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -76,7 +73,7 @@ private fun LoginContent(
         
         TextField(
             label = R.string.tf_label_email_login.load(),
-            leadingIcon = Icons.Rounded.Email,
+            leadingIcon = SensorMobileIcons.Email,
             placeholder = R.string.tf_placeholder_email_login.load(),
             value = state.email,
             onValueChange = { email ->
@@ -93,7 +90,7 @@ private fun LoginContent(
         
         TextField(
             label = R.string.tf_label_password_login.load(),
-            leadingIcon = Icons.Rounded.Password,
+            leadingIcon = SensorMobileIcons.Password,
             placeholder = R.string.tf_placeholder_password_login.load(),
             value = state.password,
             onValueChange = { password ->

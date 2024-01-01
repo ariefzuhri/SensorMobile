@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import sv.ugm.sensormobile.presentation.util.NavDrawerItem
 import sv.ugm.sensormobile.presentation.util.load
+import sv.ugm.sensormobile.presentation.util.toPainter
 
 @Composable
 fun NavDrawer(
@@ -51,7 +52,7 @@ fun NavDrawer(
                         NavigationDrawerItem(
                             icon = {
                                 Icon(
-                                    imageVector = item.icon,
+                                    painter = item.icon.toPainter(),
                                     contentDescription = null,
                                 )
                             },
