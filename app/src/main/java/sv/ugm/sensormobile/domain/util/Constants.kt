@@ -21,4 +21,6 @@ object Constants {
         
     }
     
+    const val SENSOR_AUTO_UPDATE_INTERVAL_MINUTES: Double = 5.0
+    
 }

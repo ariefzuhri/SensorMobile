@@ -13,6 +13,7 @@ import sv.ugm.sensormobile.domain.repository.ISensorOutputRepository
     includes = [
         ApiModule::class,
         DataStoreModule::class,
+        RoomModule::class,
     ],
 )
 @InstallIn(SingletonComponent::class)

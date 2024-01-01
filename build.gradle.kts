@@ -28,6 +28,7 @@ val hiltVersion by extra { "2.48.1" }
 val hiltNavigationComposeVersion by extra { "1.1.0" }
 
 val dataStoreVersion by extra { "1.0.0" }
+val roomVersion by extra { "2.6.1" }
 
 val retrofitVersion by extra { "2.9.0" }
 val moshiVersion by extra { "1.15.0" }

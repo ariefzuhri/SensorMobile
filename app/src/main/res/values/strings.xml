@@ -2,6 +2,11 @@
 
     <string name="app_name">Sensor Mobile</string>
 
+    <string name="notif_channel_id_sensorautoupdate">sensor_auto_update</string>
+    <string name="notif_channel_name_sensorautoupdate">Sensor Auto-update</string>
+    <string name="notif_channel_desc_sensorautoupdate">Pembaruan data sensor secara otomatis</string>
+    <string name="notif_message_sensorautoupdate">Memantau pembaruan data sensor…</string>
+
     <string name="txt_title_chart">Grafik %1$s</string>
     <string name="btn_cd_menu_topbar_chart">Menu</string>
     <string name="menu_light_chart">Pencahayaan</string>

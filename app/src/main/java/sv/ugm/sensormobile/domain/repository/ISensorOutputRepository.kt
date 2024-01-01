@@ -6,6 +6,10 @@ import sv.ugm.sensormobile.domain.util.Result
 
 interface ISensorOutputRepository {
     
-    suspend fun getSensorOutput(): Flow<Result<List<SensorOutput>>>
+    suspend fun getSensorOutputsFromLocal(): Flow<Result<List<SensorOutput>>>
+    
+    suspend fun getSensorOutputsFromRemote(): Flow<Result<List<SensorOutput>>>
+    
+    suspend fun replaceSensorOutputsLocal(sensorOutputs: List<SensorOutput>)
     
 }

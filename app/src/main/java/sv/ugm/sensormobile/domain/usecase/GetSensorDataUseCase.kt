@@ -16,7 +16,7 @@ class GetSensorDataUseCase @Inject constructor(
     suspend operator fun invoke(
         sensorDataType: SensorDataType,
     ): Flow<Result<List<SensorData>>> {
-        return sensorOutputRepository.getSensorOutput()
+        return sensorOutputRepository.getSensorOutputsFromLocal()
             .map { result ->
                 result.mapWhenSuccess { sensorOutputs ->
                     sensorOutputs

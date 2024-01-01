@@ -102,6 +102,7 @@ dependencies {
     val navigationVersion: String by rootProject.extra
     val hiltVersion: String by rootProject.extra
     val hiltNavigationComposeVersion: String by rootProject.extra
+    val roomVersion: String by rootProject.extra
     val dataStoreVersion: String by rootProject.extra
     val retrofitVersion: String by rootProject.extra
     val moshiVersion: String by rootProject.extra
@@ -138,6 +139,11 @@ dependencies {
     
     // Preferences DataStore - persistent storage
     implementation("androidx.datastore:datastore-preferences:$dataStoreVersion")
+    
+    // Room - persistent storage
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
     
     // Retrofit - REST client
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
