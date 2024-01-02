@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import sv.ugm.sensormobile.domain.usecase.CheckLoginSessionUseCase
 import sv.ugm.sensormobile.domain.usecase.GetSensorDataUseCase
 import sv.ugm.sensormobile.domain.util.Result
 import sv.ugm.sensormobile.domain.util.SensorDataType
@@ -16,7 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChartViewModel @Inject constructor(
-    private val checkLoginSessionUseCase: CheckLoginSessionUseCase,
     private val getSensorDataUseCase: GetSensorDataUseCase,
     private val mapper: SensorOutputPresentationMapper,
 ) : ViewModel() {
@@ -25,7 +23,6 @@ class ChartViewModel @Inject constructor(
     val state: State<ChartState> get() = _state
     
     init {
-        checkLoginSession()
         getSensorData(
             sensorDataType = _state.value.navDrawerItemList.first().sensorDataType,
         )
@@ -37,22 +34,6 @@ class ChartViewModel @Inject constructor(
                 getSensorData(
                     sensorDataType = event.sensorDataType,
                 )
-            }
-        }
-    }
-    
-    private fun checkLoginSession() {
-        viewModelScope.launch {
-            checkLoginSessionUseCase().collect { result ->
-                when (result) {
-                    is Result.Success -> {
-                        _state.value = _state.value.copy(
-                            isLoggedIn = result.data,
-                        )
-                    }
-                    
-                    else -> {}
-                }
             }
         }
     }

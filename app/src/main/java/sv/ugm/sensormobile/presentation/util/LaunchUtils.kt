@@ -11,3 +11,11 @@ fun startSensorAutoUpdateService(context: Context?) {
     )
     startService(context, intent)
 }
+
+fun stopSensorAutoUpdateService(context: Context?) {
+    val intent = Intent(
+        context,
+        SensorAutoUpdateService::class.java,
+    )
+    context?.stopService(intent)
+}

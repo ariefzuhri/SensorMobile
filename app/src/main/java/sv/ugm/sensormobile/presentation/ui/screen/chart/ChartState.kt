@@ -8,8 +8,6 @@ import sv.ugm.sensormobile.presentation.model.ChartSeries
 import sv.ugm.sensormobile.presentation.util.ChartNavDrawerItem
 
 data class ChartState(
-    val isLoggedIn: Boolean? = null,
-    
     @Stable val navDrawerItemList: List<ChartNavDrawerItem> = listOf(
         ChartNavDrawerItem.LightChart,
         ChartNavDrawerItem.SoilMoistureChart,

@@ -32,51 +32,31 @@ import sv.ugm.sensormobile.presentation.util.load
 
 @Composable
 fun ChartScreen(
-    navigateToLogin: () -> Unit,
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     scope: CoroutineScope = rememberCoroutineScope(),
     viewModel: ChartViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
     
-    if (state.isLoggedIn == true) {
-        ChartContent(
-            drawerState = drawerState,
-            scope = scope,
-            state = state,
-            viewModel = viewModel,
-        )
-        
-        val context = LocalContext.current
-        LaunchedEffect(state.failureMessage) {
-            state.failureMessage.value.asToast(context)
-        }
-        
-        BackHandler(enabled = drawerState.isOpen) {
-            scope.launch { drawerState.close() }
-        }
-        
-        LockScreenOrientation(
-            orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE,
-        )
-    } else {
-        CheckLoginSession(
-            state = state,
-            navigateToLogin = navigateToLogin,
-        )
+    ChartContent(
+        drawerState = drawerState,
+        scope = scope,
+        state = state,
+        viewModel = viewModel,
+    )
+    
+    val context = LocalContext.current
+    LaunchedEffect(state.failureMessage) {
+        state.failureMessage.value.asToast(context)
     }
-}
-
-@Composable
-fun CheckLoginSession(
-    state: ChartState,
-    navigateToLogin: () -> Unit,
-) {
-    LaunchedEffect(state.isLoggedIn) {
-        if (state.isLoggedIn == false) {
-            navigateToLogin()
-        }
+    
+    BackHandler(enabled = drawerState.isOpen) {
+        scope.launch { drawerState.close() }
     }
+    
+    LockScreenOrientation(
+        orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE,
+    )
 }
 
 @Composable

@@ -7,7 +7,6 @@ import android.os.Build
 import dagger.hilt.android.HiltAndroidApp
 import sv.ugm.sensormobile.R
 import sv.ugm.sensormobile.presentation.util.createNotificationChannel
-import sv.ugm.sensormobile.presentation.util.startSensorAutoUpdateService
 
 @HiltAndroidApp
 class MainApplication : Application() {
@@ -15,7 +14,6 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannels()
-        startSensorAutoUpdateService(this)
     }
     
     private fun createNotificationChannels() {

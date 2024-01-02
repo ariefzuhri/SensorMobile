@@ -40,14 +40,14 @@ import sv.ugm.sensormobile.presentation.util.load
 @Composable
 fun DashboardScreen(
     navigateToChart: () -> Unit,
-    navigateToLogin: () -> Unit,
+    restartApp: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
     
     DashboardContent(
         navigateToChart = navigateToChart,
-        navigateToLogin = navigateToLogin,
+        restartApp = restartApp,
         state = state,
         viewModel = viewModel,
     )
@@ -56,7 +56,7 @@ fun DashboardScreen(
 @Composable
 private fun DashboardContent(
     navigateToChart: () -> Unit,
-    navigateToLogin: () -> Unit,
+    restartApp: () -> Unit,
     state: DashboardState,
     viewModel: DashboardViewModel,
 ) {
@@ -96,7 +96,7 @@ private fun DashboardContent(
             )
             
             logoutSection(
-                navigateToLogin = navigateToLogin,
+                restartApp = restartApp,
                 viewModel = viewModel,
             )
         }
@@ -233,7 +233,7 @@ private fun LazyGridScope.summarySection(
 }
 
 private fun LazyGridScope.logoutSection(
-    navigateToLogin: () -> Unit,
+    restartApp: () -> Unit,
     viewModel: DashboardViewModel,
 ) {
     item(span = { GridItemSpan(2) }) {
@@ -245,7 +245,7 @@ private fun LazyGridScope.logoutSection(
                 icon = SensorMobileIcons.Logout,
                 onClick = {
                     viewModel.onEvent(DashboardEvent.LogOut)
-                    navigateToLogin()
+                    restartApp()
                 },
                 modifier = Modifier
                     .fillMaxSize(),
