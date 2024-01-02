@@ -7,6 +7,7 @@ object SensorMobileIcons {
     val AirQualitySensor = R.drawable.ic_air_quality_24
     val ApproxAltitudeSensor = R.drawable.ic_altitude_24
     val Back = R.drawable.ic_back_24
+    val Chart = R.drawable.ic_chart_24
     val Check = R.drawable.ic_check_24
     val Email = R.drawable.ic_mail_24
     val HumiditySensor = R.drawable.ic_humidity_24
