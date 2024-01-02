@@ -15,7 +15,11 @@ abstract class RemoteResource<DTOType : Any, DomainType : Any> {
                 
                 is RemoteResult.Success -> {
                     val data = remoteResult.data
-                    emit(Result.Success(onFetchSuccess(data)))
+                    if (data is Collection<*> && data.isEmpty()) {
+                        emit(Result.Empty)
+                    } else {
+                        emit(Result.Success(onFetchSuccess(data)))
+                    }
                 }
                 
                 is RemoteResult.Failure -> {

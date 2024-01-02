@@ -74,6 +74,8 @@ class LoginViewModel @Inject constructor(
                             failureMessage = mutableStateOf(result.message),
                         )
                     }
+                    
+                    is Result.Empty -> {}
                 }
             }
         }

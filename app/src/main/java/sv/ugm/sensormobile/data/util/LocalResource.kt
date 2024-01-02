@@ -12,7 +12,11 @@ abstract class LocalResource<DTOType : Any, DomainType : Any> {
             when (localResult) {
                 is LocalResult.Success -> {
                     val data = localResult.data
-                    emit(Result.Success(onFetchSuccess(data)))
+                    if (data is Collection<*> && data.isEmpty()) {
+                        emit(Result.Empty)
+                    } else {
+                        emit(Result.Success(onFetchSuccess(data)))
+                    }
                 }
                 
                 is LocalResult.Failure -> {
