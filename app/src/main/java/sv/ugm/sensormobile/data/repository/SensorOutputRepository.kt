@@ -60,4 +60,8 @@ class SensorOutputRepository @Inject constructor(
         )
     }
     
+    override suspend fun clearSensorOutputsLocal() {
+        localDataSource.clearSensorOutputs()
+    }
+    
 }

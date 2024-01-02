@@ -12,4 +12,6 @@ interface ISensorOutputRepository {
     
     suspend fun replaceSensorOutputsLocal(sensorOutputs: List<SensorOutput>)
     
+    suspend fun clearSensorOutputsLocal()
+    
 }

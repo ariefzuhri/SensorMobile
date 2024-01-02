@@ -2,6 +2,8 @@
 
     <string name="app_name">Sensor Mobile</string>
 
+    <string name="nd">–</string>
+
     <string name="notif_channel_id_sensorautoupdate">sensor_auto_update</string>
     <string name="notif_channel_name_sensorautoupdate">Sensor Auto-update</string>
     <string name="notif_channel_desc_sensorautoupdate">Automatic sensor data updates</string>
@@ -18,6 +20,22 @@
     <string name="menu_temperature_2_chart">Temperature 2</string>
     <string name="menu_pressure_chart">Pressure</string>
     <string name="menu_approx_altitude_chart">Approx. Altitude</string>
+
+    <string name="txt_welcome_dashboard">Welcome, %1$s!</string>
+    <string name="txt_title_summary_dashboard">Summary</string>
+    <string name="txt_last_data_dashboard">Last data:</string>
+    <string name="txt_auto_update_dashboard">auto-update</string>
+    <string name="txt_summary_light_dashboard">Light</string>
+    <string name="txt_summary_soil_moisture_dashboard">Soil Moisture</string>
+    <string name="txt_summary_air_quality_dashboard">Air Quality</string>
+    <string name="txt_summary_raindrop_dashboard">Raindrop</string>
+    <string name="txt_summary_humidity_dashboard">Humidity</string>
+    <string name="txt_summary_temperature_1_dashboard">Temperature 1</string>
+    <string name="txt_summary_temperature_2_dashboard">Temperature 2</string>
+    <string name="txt_summary_pressure_dashboard">Pressure</string>
+    <string name="txt_summary_approx_altitude_dashboard">Approx. Altitude</string>
+    <string name="btn_cd_view_chart_dashboard">View chart</string>
+    <string name="btn_log_out_dashboard">Log out</string>
 
     <string name="txt_title_login">Log In</string>
     <string name="tf_label_email_login">Email</string>
