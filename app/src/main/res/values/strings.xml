@@ -19,11 +19,11 @@
     <string name="menu_pressure_chart">Tekanan Udara</string>
     <string name="menu_approx_altitude_chart">Approx Altitude</string>
 
-    <string name="txt_title_login">Login</string>
+    <string name="txt_title_login">Log In</string>
     <string name="tf_label_email_login">Email</string>
     <string name="tf_placeholder_email_login">Masukkan email</string>
     <string name="tf_label_password_login">Kata sandi</string>
     <string name="tf_placeholder_password_login">Masukkan kata sandi</string>
-    <string name="btn_login_login">Masuk</string>
+    <string name="btn_log_in_login">Log In</string>
 
 </resources>

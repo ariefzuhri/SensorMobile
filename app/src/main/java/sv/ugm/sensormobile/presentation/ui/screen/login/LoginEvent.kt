@@ -10,7 +10,7 @@ sealed class LoginEvent {
         val password: String,
     ) : LoginEvent()
     
-    data class Login(
+    data class LogIn(
         val email: String,
         val password: String,
     ) : LoginEvent()

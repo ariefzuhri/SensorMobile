@@ -6,7 +6,7 @@ import sv.ugm.sensormobile.domain.util.Result
 
 interface IAuthRepository {
     
-    suspend fun login(
+    suspend fun logIn(
         email: String,
         password: String,
     ): Flow<Result<LoginSession>>

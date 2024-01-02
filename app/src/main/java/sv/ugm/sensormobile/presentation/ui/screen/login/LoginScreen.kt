@@ -106,10 +106,10 @@ private fun LoginContent(
         Spacer(modifier = Modifier.height(24.dp))
         
         Button(
-            title = R.string.btn_login_login.load(),
+            title = R.string.btn_log_in_login.load(),
             onClick = {
                 viewModel.onEvent(
-                    LoginEvent.Login(
+                    LoginEvent.LogIn(
                         email = state.email,
                         password = state.password,
                     ),

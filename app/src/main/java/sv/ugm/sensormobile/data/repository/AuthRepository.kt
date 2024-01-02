@@ -18,13 +18,13 @@ class AuthRepository @Inject constructor(
     private val dataMapper: LoginSessionDataMapper,
 ) : IAuthRepository {
     
-    override suspend fun login(
+    override suspend fun logIn(
         email: String,
         password: String,
     ): Flow<Result<LoginSession>> {
         return object : LocalResource<LoginSessionPreference, LoginSession>() {
             override suspend fun createCall(): Flow<LocalResult<LoginSessionPreference>> {
-                return localDataSource.login(
+                return localDataSource.logIn(
                     email = email,
                     password = password,
                 )

@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import sv.ugm.sensormobile.domain.usecase.LoginUseCase
+import sv.ugm.sensormobile.domain.usecase.LogInUseCase
 import sv.ugm.sensormobile.domain.util.Result
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase,
+    private val logInUseCase: LogInUseCase,
 ) : ViewModel() {
     
     private val _state = mutableStateOf(LoginState())
@@ -32,8 +32,8 @@ class LoginViewModel @Inject constructor(
                 )
             }
             
-            is LoginEvent.Login -> {
-                login(
+            is LoginEvent.LogIn -> {
+                logIn(
                     email = event.email,
                     password = event.password,
                 )
@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(
         }
     }
     
-    private fun login(
+    private fun logIn(
         email: String,
         password: String,
     ) {
@@ -49,7 +49,7 @@ class LoginViewModel @Inject constructor(
             isLoading = true,
         )
         viewModelScope.launch {
-            loginUseCase(
+            logInUseCase(
                 email = email,
                 password = password,
             ).collect { result ->

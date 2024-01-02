@@ -8,7 +8,7 @@ import sv.ugm.sensormobile.domain.util.Result
 import sv.ugm.sensormobile.domain.util.mapWhenSuccess
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(
+class LogInUseCase @Inject constructor(
     private val authRepository: IAuthRepository,
 ) {
     
@@ -16,7 +16,7 @@ class LoginUseCase @Inject constructor(
         email: String,
         password: String,
     ): Flow<Result<LoginSession>> {
-        return authRepository.login(
+        return authRepository.logIn(
             email = email,
             password = password,
         ).map { result ->

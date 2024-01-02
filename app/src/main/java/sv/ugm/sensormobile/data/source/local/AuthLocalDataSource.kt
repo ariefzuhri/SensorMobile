@@ -17,7 +17,7 @@ class AuthLocalDataSource @Inject constructor(
 ) {
     
     // Dummy login
-    suspend fun login(
+    suspend fun logIn(
         email: String,
         password: String,
     ): Flow<LocalResult<LoginSessionPreference>> {
