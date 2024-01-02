@@ -4,26 +4,26 @@
 
     <string name="notif_channel_id_sensorautoupdate">sensor_auto_update</string>
     <string name="notif_channel_name_sensorautoupdate">Sensor Auto-update</string>
-    <string name="notif_channel_desc_sensorautoupdate">Pembaruan data sensor secara otomatis</string>
-    <string name="notif_message_sensorautoupdate">Memantau pembaruan data sensor…</string>
+    <string name="notif_channel_desc_sensorautoupdate">Automatic sensor data updates</string>
+    <string name="notif_message_sensorautoupdate">Monitoring sensor data updates…</string>
 
-    <string name="txt_title_chart">Grafik %1$s</string>
+    <string name="txt_title_chart">%1$s Sensor</string>
     <string name="btn_cd_menu_topbar_chart">Menu</string>
-    <string name="menu_light_chart">Pencahayaan</string>
-    <string name="menu_soil_moisture_chart">Kelembapan Tanah</string>
-    <string name="menu_air_quality_chart">Kualitas Udara</string>
-    <string name="menu_raindrop_chart">Curah Hujan</string>
-    <string name="menu_humidity_chart">Kelembapan Udara</string>
-    <string name="menu_temperature_1_chart">Temperatur 1</string>
-    <string name="menu_temperature_2_chart">Temperatur 2</string>
-    <string name="menu_pressure_chart">Tekanan Udara</string>
-    <string name="menu_approx_altitude_chart">Approx Altitude</string>
+    <string name="menu_light_chart">Light</string>
+    <string name="menu_soil_moisture_chart">Soil Moisture</string>
+    <string name="menu_air_quality_chart">Air Quality</string>
+    <string name="menu_raindrop_chart">Raindrop</string>
+    <string name="menu_humidity_chart">Humidity</string>
+    <string name="menu_temperature_1_chart">Temperature 1</string>
+    <string name="menu_temperature_2_chart">Temperature 2</string>
+    <string name="menu_pressure_chart">Pressure</string>
+    <string name="menu_approx_altitude_chart">Approx. Altitude</string>
 
     <string name="txt_title_login">Log In</string>
     <string name="tf_label_email_login">Email</string>
-    <string name="tf_placeholder_email_login">Masukkan email</string>
-    <string name="tf_label_password_login">Kata sandi</string>
-    <string name="tf_placeholder_password_login">Masukkan kata sandi</string>
+    <string name="tf_placeholder_email_login">Enter your email…</string>
+    <string name="tf_label_password_login">Password</string>
+    <string name="tf_placeholder_password_login">Enter password…</string>
     <string name="btn_log_in_login">Log In</string>
 
 </resources>
