@@ -43,13 +43,13 @@ sealed class ChartNavDrawerItem(
     data object LightChart : ChartNavDrawerItem(
         title = R.string.menu_light_chart,
         icon = SensorMobileIcons.LightSensor,
-        sensorDataType = SensorDataType.LightData,
+        sensorDataType = SensorDataType.Light,
     )
     
     data object PressureChart : ChartNavDrawerItem(
         title = R.string.menu_pressure_chart,
         icon = SensorMobileIcons.PressureSensor,
-        sensorDataType = SensorDataType.PressureData,
+        sensorDataType = SensorDataType.Pressure,
     )
     
     data object RaindropChart : ChartNavDrawerItem(
@@ -61,7 +61,7 @@ sealed class ChartNavDrawerItem(
     data object SoilMoistureChart : ChartNavDrawerItem(
         title = R.string.menu_soil_moisture_chart,
         icon = SensorMobileIcons.SoilMoistureSensor,
-        sensorDataType = SensorDataType.SoilMoistureData,
+        sensorDataType = SensorDataType.SoilMoisture,
     )
     
     data object Temperature1Chart : ChartNavDrawerItem(

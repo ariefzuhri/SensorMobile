@@ -26,10 +26,10 @@ class GetSensorDataUseCase @Inject constructor(
                                     SensorDataType.AirQuality -> it.airQuality
                                     SensorDataType.ApproxAltitude -> it.approxAltitude
                                     SensorDataType.Humidity -> it.humidity
-                                    SensorDataType.LightData -> it.light
-                                    SensorDataType.PressureData -> it.pressure
+                                    SensorDataType.Light -> it.light
+                                    SensorDataType.Pressure -> it.pressure
                                     SensorDataType.Raindrop -> it.raindrop
-                                    SensorDataType.SoilMoistureData -> it.soilMoisture
+                                    SensorDataType.SoilMoisture -> it.soilMoisture
                                     SensorDataType.Temperature1 -> it.temperature1
                                     SensorDataType.Temperature2 -> it.temperature2
                                 },
