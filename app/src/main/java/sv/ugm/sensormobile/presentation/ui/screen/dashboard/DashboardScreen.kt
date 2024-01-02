@@ -164,12 +164,12 @@ private fun LazyGridScope.summarySection(
                         text = it,
                         style = MaterialTheme.typography.bodyMedium,
                     )
+                    Spacer(modifier = Modifier.size(8.dp))
+                    Badge(
+                        text = R.string.txt_auto_update_dashboard.load(),
+                        icon = SensorMobileIcons.Check,
+                    )
                 } ?: DataLoading()
-                Spacer(modifier = Modifier.size(8.dp))
-                Badge(
-                    text = R.string.txt_auto_update_dashboard.load(),
-                    icon = SensorMobileIcons.Check,
-                )
             }
             
             Spacer(modifier = Modifier.size(24.dp))
