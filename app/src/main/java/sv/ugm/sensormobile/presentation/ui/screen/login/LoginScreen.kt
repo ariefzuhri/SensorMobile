@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -21,8 +22,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import sv.ugm.sensormobile.R
-import sv.ugm.sensormobile.presentation.ui.designsystem.component.Button
+import sv.ugm.sensormobile.presentation.ui.designsystem.component.PrimaryButton
 import sv.ugm.sensormobile.presentation.ui.designsystem.component.TextField
+import sv.ugm.sensormobile.presentation.ui.designsystem.icon.SensorMobileIcons
 import sv.ugm.sensormobile.presentation.util.CONTAINER_PADDING_DP
 import sv.ugm.sensormobile.presentation.util.asToast
 import sv.ugm.sensormobile.presentation.util.load
@@ -105,8 +107,9 @@ private fun LoginContent(
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        Button(
+        PrimaryButton(
             title = R.string.btn_log_in_login.load(),
+            icon = SensorMobileIcons.Login,
             onClick = {
                 viewModel.onEvent(
                     LoginEvent.LogIn(
@@ -115,7 +118,10 @@ private fun LoginContent(
                     ),
                 )
             },
-            enabled = !state.isLoading && state.email.isNotEmpty() && state.password.isNotEmpty(),
+            isLoading = state.isLoading,
+            enabled = state.email.isNotEmpty() && state.password.isNotEmpty(),
+            modifier = Modifier
+                .fillMaxWidth(),
         )
     }
 }
