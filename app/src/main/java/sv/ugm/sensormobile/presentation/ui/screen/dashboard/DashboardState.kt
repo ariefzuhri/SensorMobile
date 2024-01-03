@@ -6,7 +6,7 @@ import sv.ugm.sensormobile.presentation.model.SensorData
 import sv.ugm.sensormobile.presentation.model.SensorSummary
 
 data class DashboardState(
-    val userName: String = "User",
+    val userName: String = "sensor1User!",
     val sensorSummary: SensorSummary = SensorSummary(
         latestAirQuality = SensorData(
             type = SensorDataType.AirQuality,
