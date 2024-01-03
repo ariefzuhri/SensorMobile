@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -144,16 +143,14 @@ private fun LoginSection(
     Spacer(modifier = Modifier.height(42.dp))
     
     TextField(
-        leadingIcon = SensorMobileIcons.Email,
-        placeholder = R.string.edt_placeholder_email_login.load(),
-        value = state.email,
-        onValueChange = { email ->
+        leadingIcon = SensorMobileIcons.Username,
+        placeholder = R.string.edt_placeholder_username_login.load(),
+        value = state.username,
+        onValueChange = { username ->
             viewModel.onEvent(
-                LoginEvent.OnEmailChanged(email = email),
+                LoginEvent.OnUsernameChanged(username = username),
             )
         },
-        keyboardType = KeyboardType.Email,
-        capitalization = KeyboardCapitalization.None,
         imeAction = ImeAction.Next,
     )
     
@@ -169,7 +166,6 @@ private fun LoginSection(
             )
         },
         keyboardType = KeyboardType.Password,
-        capitalization = KeyboardCapitalization.None,
         visualTransformation = PasswordVisualTransformation(),
     )
     
@@ -181,13 +177,13 @@ private fun LoginSection(
         onClick = {
             viewModel.onEvent(
                 LoginEvent.LogIn(
-                    email = state.email,
+                    username = state.username,
                     password = state.password,
                 ),
             )
         },
         isLoading = state.isLoading,
-        enabled = state.email.isNotEmpty() && state.password.isNotEmpty(),
+        enabled = state.username.isNotEmpty() && state.password.isNotEmpty(),
         modifier = Modifier
             .fillMaxWidth(),
     )

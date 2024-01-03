@@ -19,13 +19,13 @@ class AuthRepository @Inject constructor(
 ) : IAuthRepository {
     
     override suspend fun logIn(
-        email: String,
+        username: String,
         password: String,
     ): Flow<Result<LoginSession>> {
         return object : LocalResource<LoginSessionPreference, LoginSession>() {
             override suspend fun createCall(): Flow<LocalResult<LoginSessionPreference>> {
                 return localDataSource.logIn(
-                    email = email,
+                    username = username,
                     password = password,
                 )
             }

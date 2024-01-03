@@ -13,11 +13,11 @@ class LogInUseCase @Inject constructor(
 ) {
     
     suspend operator fun invoke(
-        email: String,
+        username: String,
         password: String,
     ): Flow<Result<LoginSession>> {
         return authRepository.logIn(
-            email = email.lowercase(),
+            username = username,
             password = password,
         ).map { result ->
             result.mapWhenSuccess {

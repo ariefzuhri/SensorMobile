@@ -10,8 +10,8 @@ class UserData @Inject constructor() {
     private val userList = listOf(
         UserStatic(
             id = 1,
-            email = "sensormobile@mail.com",
-            password = "sensormobile",
+            username = "sensor1User!",
+            password = "admin",
         )
     )
     

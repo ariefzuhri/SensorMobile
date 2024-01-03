@@ -24,5 +24,6 @@ object SensorMobileIcons {
     val Summary = R.drawable.ic_summary_24
     val Temperature1Sensor = R.drawable.ic_temperature_24
     val Temperature2Sensor = R.drawable.ic_temperature_24
+    val Username = R.drawable.ic_user_24
 
 }

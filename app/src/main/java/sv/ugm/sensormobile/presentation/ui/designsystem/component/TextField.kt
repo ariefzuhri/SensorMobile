@@ -157,9 +157,9 @@ private fun TextFieldPreview() {
     SensorMobileTheme {
         TextField(
             value = "",
-            leadingIcon = SensorMobileIcons.Email,
-            placeholder = R.string.edt_placeholder_email_login.load(),
-            helper = "Email tidak boleh kosong",
+            leadingIcon = SensorMobileIcons.Username,
+            placeholder = R.string.edt_placeholder_username_login.load(),
+            helper = "Username is required",
             keyboardType = KeyboardType.Text,
             onValueChange = {},
         )

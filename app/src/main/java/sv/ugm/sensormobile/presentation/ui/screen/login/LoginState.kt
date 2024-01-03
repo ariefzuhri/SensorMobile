@@ -6,7 +6,7 @@ import sv.ugm.sensormobile.BuildConfig
 
 data class LoginState(
     val appVersion: String = "v${BuildConfig.VERSION_NAME}",
-    val email: String = "",
+    val username: String = "",
     val password: String = "",
     
     val isSuccess: Boolean = false,

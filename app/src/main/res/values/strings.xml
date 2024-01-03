@@ -39,7 +39,7 @@
     <string name="btn_log_out_dashboard">Log out</string>
 
     <string name="txt_title_login">Log in to continue</string>
-    <string name="edt_placeholder_email_login">Enter your email…</string>
+    <string name="edt_placeholder_username_login">Enter your username…</string>
     <string name="edt_placeholder_password_login">Enter password…</string>
     <string name="btn_log_in_login">Log In</string>
 

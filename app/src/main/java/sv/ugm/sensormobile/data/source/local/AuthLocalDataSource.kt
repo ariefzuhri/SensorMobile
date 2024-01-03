@@ -18,13 +18,13 @@ class AuthLocalDataSource @Inject constructor(
     
     // Dummy login
     suspend fun logIn(
-        email: String,
+        username: String,
         password: String,
     ): Flow<LocalResult<LoginSessionPreference>> {
         return flow {
             val userList = userData.getAll()
             val loggedInUser = userList.find {
-                it.email == email && it.password == password
+                it.username == username && it.password == password
             }
             
             if (loggedInUser != null) {
@@ -35,7 +35,7 @@ class AuthLocalDataSource @Inject constructor(
             } else {
                 emit(
                     LocalResult.Failure(
-                        Exception("Invalid email or password")
+                        Exception("Invalid username/password")
                     )
                 )
             }

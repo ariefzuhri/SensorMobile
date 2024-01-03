@@ -20,9 +20,9 @@ class LoginViewModel @Inject constructor(
     
     fun onEvent(event: LoginEvent) {
         when (event) {
-            is LoginEvent.OnEmailChanged -> {
+            is LoginEvent.OnUsernameChanged -> {
                 _state.value = _state.value.copy(
-                    email = event.email,
+                    username = event.username,
                 )
             }
             
@@ -34,7 +34,7 @@ class LoginViewModel @Inject constructor(
             
             is LoginEvent.LogIn -> {
                 logIn(
-                    email = event.email,
+                    username = event.username,
                     password = event.password,
                 )
             }
@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor(
     }
     
     private fun logIn(
-        email: String,
+        username: String,
         password: String,
     ) {
         _state.value = _state.value.copy(
@@ -50,7 +50,7 @@ class LoginViewModel @Inject constructor(
         )
         viewModelScope.launch {
             logInUseCase(
-                email = email,
+                username = username,
                 password = password,
             ).collect { result ->
                 when (result) {
