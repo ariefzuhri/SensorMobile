@@ -115,7 +115,7 @@ private fun LazyGridScope.profileSection(
                     R.string.txt_welcome_dashboard,
                     state.userName,
                 ),
-                style = MaterialTheme.typography.headlineMedium,
+                style = MaterialTheme.typography.headlineSmall,
             )
             
             Spacer(modifier = Modifier.size(48.dp))

@@ -67,7 +67,7 @@ fun TextField(
         keyboardActions = keyboardActions,
         singleLine = !isMultiline,
         maxLines = 4,
-        textStyle = MaterialTheme.typography.labelMedium
+        textStyle = MaterialTheme.typography.labelLarge
             .copy(color = MaterialTheme.colorScheme.onBackground),
         interactionSource = interactionSource,
         decorationBox = { innerTextField ->
@@ -131,9 +131,9 @@ private fun TextFieldContainer(
                 if (value.isEmpty()) {
                     Text(
                         text = placeholder,
-                        style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurface.copy(0.5f),
                         softWrap = false,
+                        style = MaterialTheme.typography.labelLarge,
                     )
                 }
             }
@@ -143,7 +143,7 @@ private fun TextFieldContainer(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = helper,
-                style = MaterialTheme.typography.labelSmall,
+                style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.5f),
                 modifier = Modifier.padding(horizontal = 16.dp),
             )

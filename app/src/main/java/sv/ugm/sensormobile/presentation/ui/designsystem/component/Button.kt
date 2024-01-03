@@ -52,7 +52,7 @@ private fun BaseButton(
                 Text(
                     text = title,
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.labelLarge,
                 )
                 Spacer(modifier = Modifier.size(6.dp))
                 Icon(

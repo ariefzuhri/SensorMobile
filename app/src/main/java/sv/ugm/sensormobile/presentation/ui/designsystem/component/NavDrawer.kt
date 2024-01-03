@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -57,7 +58,10 @@ fun NavDrawer(
                                 )
                             },
                             label = {
-                                Text(text = item.title.load())
+                                Text(
+                                    text = item.title.load(),
+                                    style = MaterialTheme.typography.titleSmall,
+                                )
                             },
                             selected = item == selectedItem.value,
                             onClick = {
