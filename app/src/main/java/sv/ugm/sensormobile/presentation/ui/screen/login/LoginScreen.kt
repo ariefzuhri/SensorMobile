@@ -100,9 +100,9 @@ private fun HeaderSection(
         ) {
             Icon(
                 icon = SensorMobileIcons.Logo,
-                size = 48.dp,
+                size = 64.dp,
             )
-            Spacer(modifier = Modifier.size(12.dp))
+            Spacer(modifier = Modifier.size(8.dp))
             Text(
                 text = R.string.app_name.load(),
                 textAlign = TextAlign.Center,

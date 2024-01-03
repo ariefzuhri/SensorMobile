@@ -76,11 +76,11 @@ private fun SplashSection(
     ) {
         Icon(
             icon = SensorMobileIcons.Logo,
-            size = 80.dp,
+            size = 100.dp,
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(
-                    bottom = 40.dp,
+                    bottom = 75.dp,
                 ),
         )
         Badge(
