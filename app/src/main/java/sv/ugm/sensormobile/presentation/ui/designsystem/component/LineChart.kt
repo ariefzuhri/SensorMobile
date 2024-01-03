@@ -97,6 +97,10 @@ fun LineChart(
     
     val yAxis = rememberStartAxis(
         valueFormatter = yAxisValueFormatter,
+        title = series.yAxisTitle,
+        titleComponent = axisLabelComponent(
+            horizontalMargin = 2.dp,
+        ),
     ).takeIf { series.datasets.any { it.entries.isNotEmpty() } }
     
     val marker = rememberMarker(

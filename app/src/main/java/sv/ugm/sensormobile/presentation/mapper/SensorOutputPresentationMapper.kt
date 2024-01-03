@@ -14,6 +14,7 @@ class SensorOutputPresentationMapper @Inject constructor() {
     fun mapDomainToPresentation(
         input: List<SensorData>,
         @StringRes label: Int,
+        unit: String,
     ): ChartSeries {
         val chartEntries = mutableListOf<ChartSeries.ChartEntry>()
         val xAxisLabels = mutableListOf<String>()
@@ -52,7 +53,9 @@ class SensorOutputPresentationMapper @Inject constructor() {
                 ),
             ),
             xAxisLabels = xAxisLabels,
+            xAxisTitle = null,
             yAxisLabels = yAxisLabels,
+            yAxisTitle = unit,
         )
     }
     

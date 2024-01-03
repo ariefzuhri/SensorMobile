@@ -24,7 +24,9 @@ data class ChartState(
     
     val chartData: ChartSeries = ChartSeries(
         emptyList(),
+        null,
         emptyList(),
+        null,
         emptyList(),
     ),
     val isLoading: Boolean = false,

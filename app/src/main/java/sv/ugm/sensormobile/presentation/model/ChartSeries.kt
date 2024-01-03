@@ -6,7 +6,9 @@ import androidx.annotation.StringRes
 
 data class ChartSeries(
     val datasets: List<ChartDataset>,
+    val xAxisTitle: String?,
     val xAxisLabels: List<String?>,
+    val yAxisTitle: String?,
     val yAxisLabels: List<String?>,
 ) {
     

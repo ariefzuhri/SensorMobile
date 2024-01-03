@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import sv.ugm.sensormobile.domain.enums.SensorOutputUnit
 import sv.ugm.sensormobile.domain.usecase.GetSensorDataUseCase
 import sv.ugm.sensormobile.domain.util.Result
 import sv.ugm.sensormobile.domain.util.SensorDataType
@@ -62,8 +63,20 @@ class ChartViewModel @Inject constructor(
             getSensorDataUseCase(
                 sensorDataType = sensorDataType,
             ).collect { result ->
+                // TODO: Are these clean?
                 @StringRes val sensorDataName = _state.value.navDrawerItemList
                     .first { it.sensorDataType == sensorDataType }.title
+                val sensorOutputUnit = when (sensorDataType) {
+                    SensorDataType.AirQuality -> SensorOutputUnit.AIR_QUALITY
+                    SensorDataType.ApproxAltitude -> SensorOutputUnit.APPROX_ALTITUDE
+                    SensorDataType.Humidity -> SensorOutputUnit.HUMIDITY
+                    SensorDataType.Light -> SensorOutputUnit.LIGHT
+                    SensorDataType.Pressure -> SensorOutputUnit.PRESSURE
+                    SensorDataType.Raindrop -> SensorOutputUnit.RAINDROP
+                    SensorDataType.SoilMoisture -> SensorOutputUnit.SOIL_MOISTURE
+                    SensorDataType.Temperature1 -> SensorOutputUnit.TEMPERATURE_1
+                    SensorDataType.Temperature2 -> SensorOutputUnit.TEMPERATURE_2
+                }.unit
                 
                 when (result) {
                     is Result.Loading -> {
@@ -79,6 +92,7 @@ class ChartViewModel @Inject constructor(
                             chartData = mapper.mapDomainToPresentation(
                                 input = result.data,
                                 label = sensorDataName,
+                                unit = sensorOutputUnit,
                             ),
                             isLoading = false,
                         )
