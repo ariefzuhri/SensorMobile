@@ -32,6 +32,7 @@ import sv.ugm.sensormobile.presentation.util.load
 
 @Composable
 fun ChartScreen(
+    onBack: () -> Unit,
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     scope: CoroutineScope = rememberCoroutineScope(),
     viewModel: ChartViewModel = hiltViewModel(),
@@ -43,6 +44,7 @@ fun ChartScreen(
         scope = scope,
         state = state,
         viewModel = viewModel,
+        onBack = onBack,
     )
     
     val context = LocalContext.current
@@ -65,6 +67,7 @@ private fun ChartContent(
     scope: CoroutineScope,
     state: ChartState,
     viewModel: ChartViewModel,
+    onBack: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -73,6 +76,10 @@ private fun ChartContent(
                     id = R.string.txt_title_chart,
                     state.chartTitle.load(),
                 ),
+                onBackClick = {
+                    onBack()
+                },
+                onBackContDesc = R.string.btn_cd_back_chart.load(),
                 onMenuClick = {
                     scope.launch {
                         if (drawerState.isOpen) drawerState.close()

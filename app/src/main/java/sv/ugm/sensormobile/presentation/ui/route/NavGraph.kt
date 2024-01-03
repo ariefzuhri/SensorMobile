@@ -26,7 +26,11 @@ fun NavGraph(
         modifier = modifier,
     ) {
         composable(Screen.Chart.route) {
-            ChartScreen()
+            ChartScreen(
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
         
         composable(Screen.Dashboard.route) {

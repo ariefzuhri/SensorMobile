@@ -10,7 +10,8 @@
     <string name="notif_message_sensorautoupdate">Monitoring sensor data updates…</string>
 
     <string name="txt_title_chart">%1$s Sensor</string>
-    <string name="btn_cd_menu_topbar_chart">Menu</string>
+    <string name="btn_cd_back_chart">Back to previous screen</string>
+    <string name="btn_cd_menu_topbar_chart">Open the menu</string>
     <string name="menu_light_chart">Light</string>
     <string name="menu_soil_moisture_chart">Soil Moisture</string>
     <string name="menu_air_quality_chart">Air Quality</string>
