@@ -107,6 +107,7 @@ dependencies {
     val retrofitVersion: String by rootProject.extra
     val moshiVersion: String by rootProject.extra
     val chuckerVersion: String by rootProject.extra
+    val accompanistPermissionsVersion: String by rootProject.extra
     val leakCanaryVersion: String by rootProject.extra
     val vicoVersion: String by rootProject.extra
     val junitVersion: String by rootProject.extra
@@ -156,6 +157,9 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:$chuckerVersion")
     alphaImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chuckerVersion")
+    
+    // Accompanist Permissions - permissions handling
+    implementation("com.google.accompanist:accompanist-permissions:$accompanistPermissionsVersion")
     
     // LeakCanary - memory leak detection
     debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")
