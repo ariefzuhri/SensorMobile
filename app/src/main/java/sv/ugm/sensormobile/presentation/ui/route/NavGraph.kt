@@ -46,7 +46,9 @@ fun NavGraph(
             )
         }
         
-        composable(Screen.Dashboard.route) {
+        composable(
+            route = Screen.Dashboard.route,
+        ) {
             DashboardScreen(
                 navigateToChart = { sensorDataTypeId ->
                     navController.navigate(
@@ -65,7 +67,9 @@ fun NavGraph(
             )
         }
         
-        composable(Screen.Login.route) {
+        composable(
+            route = Screen.Login.route,
+        ) {
             LoginScreen(
                 restartApp = {
                     navController.navigate(Screen.Splash.route) {
@@ -77,7 +81,9 @@ fun NavGraph(
             )
         }
         
-        composable(Screen.Splash.route) {
+        composable(
+            route = Screen.Splash.route,
+        ) {
             SplashScreen(
                 navigateToLogin = {
                     navController.navigate(Screen.Login.route) {
@@ -98,7 +104,7 @@ fun NavGraph(
                 },
                 stopSensorAutoUpdateService = {
                     stopSensorAutoUpdateService(context)
-                }
+                },
             )
         }
     }
