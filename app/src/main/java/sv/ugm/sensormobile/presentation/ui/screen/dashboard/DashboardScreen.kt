@@ -110,6 +110,8 @@ private fun LazyGridScope.profileSection(
 ) {
     item(span = { GridItemSpan(2) }) {
         Column {
+            Spacer(modifier = Modifier.size(16.dp))
+            
             Text(
                 text = stringResource(
                     R.string.txt_welcome_dashboard,
