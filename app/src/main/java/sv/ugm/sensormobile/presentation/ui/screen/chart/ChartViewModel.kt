@@ -67,7 +67,7 @@ class ChartViewModel @Inject constructor(
                         )
                     }
                     
-                    Result.Empty -> {
+                    is Result.Empty -> {
                         _state.value = _state.value.copy(
                             chartTitle = sensorDataName,
                             isLoading = false,

@@ -75,7 +75,7 @@ class LoginViewModel @Inject constructor(
                         )
                     }
                     
-                    is Result.Empty -> {}
+                    else -> {}
                 }
             }
         }

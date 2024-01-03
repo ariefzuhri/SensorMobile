@@ -10,8 +10,8 @@ class LogOutUseCase @Inject constructor(
 ) {
     
     suspend operator fun invoke() {
-        sensorOutputRepository.clearSensorOutputsLocal()
         authRepository.clearLoginSession()
+        sensorOutputRepository.clearSensorOutputsLocal()
     }
     
 }

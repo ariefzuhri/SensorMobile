@@ -38,8 +38,6 @@ class DashboardViewModel @Inject constructor(
         viewModelScope.launch {
             getSensorSummaryUseCase().collect { result ->
                 when (result) {
-                    is Result.Loading -> {}
-                    
                     is Result.Success -> {
                         _state.value = _state.value.copy(
                             sensorSummary = mapper.mapDomainToPresentation(
@@ -48,9 +46,7 @@ class DashboardViewModel @Inject constructor(
                         )
                     }
                     
-                    is Result.Empty -> {}
-                    
-                    is Result.Failure -> {}
+                    else -> {}
                 }
             }
         }
