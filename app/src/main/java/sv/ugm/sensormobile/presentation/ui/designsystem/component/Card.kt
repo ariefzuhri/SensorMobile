@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,8 +39,8 @@ fun Card(
             .shadow(
                 elevation = 20.dp,
                 shape = MaterialTheme.shapes.medium,
-                ambientColor = Color.Black.copy(0.4f),
-                spotColor = Color.Black.copy(0.4f),
+                ambientColor = MaterialTheme.colorScheme.onSurface.copy(0.5f),
+                spotColor = MaterialTheme.colorScheme.onSurface.copy(0.5f),
             )
             .clip(MaterialTheme.shapes.medium)
             .background(

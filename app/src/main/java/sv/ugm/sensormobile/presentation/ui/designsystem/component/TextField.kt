@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -66,7 +67,8 @@ fun TextField(
         keyboardActions = keyboardActions,
         singleLine = !isMultiline,
         maxLines = 4,
-        textStyle = MaterialTheme.typography.labelMedium,
+        textStyle = MaterialTheme.typography.labelMedium
+            .copy(color = MaterialTheme.colorScheme.onBackground),
         interactionSource = interactionSource,
         decorationBox = { innerTextField ->
             TextFieldContainer(
@@ -78,6 +80,7 @@ fun TextField(
                 isFocus = isFocus,
             )
         },
+        cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
         modifier = modifier,
     )
 }
@@ -102,8 +105,8 @@ private fun TextFieldContainer(
                 .shadow(
                     elevation = 20.dp,
                     shape = MaterialTheme.shapes.medium,
-                    ambientColor = Color.Black.copy(0.4f),
-                    spotColor = Color.Black.copy(0.4f),
+                    ambientColor = MaterialTheme.colorScheme.onSurface.copy(0.5f),
+                    spotColor = MaterialTheme.colorScheme.onSurface.copy(0.5f),
                 )
                 .clip(MaterialTheme.shapes.medium)
                 .background(
@@ -129,7 +132,7 @@ private fun TextFieldContainer(
                     Text(
                         text = placeholder,
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurface.copy(0.4f),
+                        color = MaterialTheme.colorScheme.onSurface.copy(0.5f),
                         softWrap = false,
                     )
                 }
@@ -141,7 +144,7 @@ private fun TextFieldContainer(
             Text(
                 text = helper,
                 style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onBackground.copy(0.4f),
+                color = MaterialTheme.colorScheme.onBackground.copy(0.5f),
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
         }
