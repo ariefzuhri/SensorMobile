@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import sv.ugm.sensormobile.domain.usecase.CheckLoginSessionUseCase
 import sv.ugm.sensormobile.domain.util.Result
@@ -24,6 +25,7 @@ class SplashViewModel @Inject constructor(
     
     private fun checkLoginSession() {
         viewModelScope.launch {
+            delay(500)
             checkLoginSessionUseCase().collect { result ->
                 when (result) {
                     is Result.Success -> {
