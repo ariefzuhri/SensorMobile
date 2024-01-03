@@ -17,7 +17,7 @@ class LogInUseCase @Inject constructor(
         password: String,
     ): Flow<Result<LoginSession>> {
         return authRepository.logIn(
-            email = email,
+            email = email.lowercase(),
             password = password,
         ).map { result ->
             result.mapWhenSuccess {
