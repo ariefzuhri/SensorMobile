@@ -30,7 +30,9 @@ fun NavDrawer(
     gestureEnabled: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    val selectedItem = remember { mutableStateOf(itemList[0]) }
+    val selectedItem = remember {
+        mutableStateOf<NavDrawerItem?>(null)
+    }
     
     ModalNavigationDrawer(
         drawerState = drawerState,
