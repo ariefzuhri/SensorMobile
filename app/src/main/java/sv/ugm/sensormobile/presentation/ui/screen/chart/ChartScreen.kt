@@ -33,11 +33,20 @@ import sv.ugm.sensormobile.presentation.util.load
 @Composable
 fun ChartScreen(
     onBack: () -> Unit,
+    sensorDataTypeId: Int,
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     scope: CoroutineScope = rememberCoroutineScope(),
     viewModel: ChartViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
+    
+    LaunchedEffect(sensorDataTypeId) {
+        viewModel.onEvent(
+            ChartEvent.Init(
+                sensorDataTypeId = sensorDataTypeId,
+            )
+        )
+    }
     
     ChartContent(
         drawerState = drawerState,

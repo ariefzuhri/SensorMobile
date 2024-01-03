@@ -22,20 +22,37 @@ class ChartViewModel @Inject constructor(
     private val _state = mutableStateOf(ChartState())
     val state: State<ChartState> get() = _state
     
-    init {
-        getSensorData(
-            sensorDataType = _state.value.navDrawerItemList.first().sensorDataType,
-        )
-    }
-    
     fun onEvent(event: ChartEvent) {
         when (event) {
+            is ChartEvent.Init -> {
+                init(
+                    sensorDataTypeId = event.sensorDataTypeId,
+                )
+            }
+            
             is ChartEvent.OnSensorDataTypeSelected -> {
                 getSensorData(
                     sensorDataType = event.sensorDataType,
                 )
             }
         }
+    }
+    
+    private fun init(sensorDataTypeId: Int) {
+        getSensorData(
+            sensorDataType = when (sensorDataTypeId) {
+                SensorDataType.AirQuality.id -> SensorDataType.AirQuality
+                SensorDataType.ApproxAltitude.id -> SensorDataType.ApproxAltitude
+                SensorDataType.Humidity.id -> SensorDataType.Humidity
+                SensorDataType.Light.id -> SensorDataType.Light
+                SensorDataType.Pressure.id -> SensorDataType.Pressure
+                SensorDataType.Raindrop.id -> SensorDataType.Raindrop
+                SensorDataType.SoilMoisture.id -> SensorDataType.SoilMoisture
+                SensorDataType.Temperature1.id -> SensorDataType.Temperature1
+                SensorDataType.Temperature2.id -> SensorDataType.Temperature2
+                else -> SensorDataType.Light
+            },
+        )
     }
     
     private fun getSensorData(

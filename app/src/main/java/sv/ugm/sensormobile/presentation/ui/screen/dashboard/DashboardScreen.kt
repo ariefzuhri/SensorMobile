@@ -39,7 +39,7 @@ import sv.ugm.sensormobile.presentation.util.load
 
 @Composable
 fun DashboardScreen(
-    navigateToChart: () -> Unit,
+    navigateToChart: (Int) -> Unit,
     restartApp: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
@@ -55,7 +55,7 @@ fun DashboardScreen(
 
 @Composable
 private fun DashboardContent(
-    navigateToChart: () -> Unit,
+    navigateToChart: (Int) -> Unit,
     restartApp: () -> Unit,
     state: DashboardState,
     viewModel: DashboardViewModel,
@@ -65,7 +65,9 @@ private fun DashboardContent(
             FloatingActionButton(
                 shape = CircleShape,
                 containerColor = MaterialTheme.colorScheme.primary,
-                onClick = navigateToChart,
+                onClick = {
+                    navigateToChart(SensorDataType.Light.id)
+                },
                 modifier = Modifier
                     .padding(8.dp),
             ) {
@@ -123,7 +125,7 @@ private fun LazyGridScope.profileSection(
 
 private fun LazyGridScope.summarySection(
     state: DashboardState,
-    navigateToChart: () -> Unit,
+    navigateToChart: (Int) -> Unit,
 ) {
     item(span = { GridItemSpan(2) }) {
         Column {
@@ -227,7 +229,9 @@ private fun LazyGridScope.summarySection(
                 SensorDataType.Humidity,
                 -> "${item.value}${item.unit}"
             }.takeIf { item.value != null },
-            onClick = navigateToChart,
+            onClick = {
+                navigateToChart(item.type.id)
+            },
         )
     }
 }

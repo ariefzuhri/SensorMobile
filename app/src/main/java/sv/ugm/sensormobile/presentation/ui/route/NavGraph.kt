@@ -4,12 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import sv.ugm.sensormobile.presentation.ui.screen.chart.ChartScreen
 import sv.ugm.sensormobile.presentation.ui.screen.dashboard.DashboardScreen
 import sv.ugm.sensormobile.presentation.ui.screen.login.LoginScreen
 import sv.ugm.sensormobile.presentation.ui.screen.splash.SplashScreen
+import sv.ugm.sensormobile.presentation.util.Constants
 import sv.ugm.sensormobile.presentation.util.startSensorAutoUpdateService
 import sv.ugm.sensormobile.presentation.util.stopSensorAutoUpdateService
 
@@ -25,18 +28,32 @@ fun NavGraph(
         startDestination = Screen.Splash.route,
         modifier = modifier,
     ) {
-        composable(Screen.Chart.route) {
+        composable(
+            route = Screen.Chart.route,
+            arguments = listOf(
+                navArgument(Constants.Extras.SENSOR_DATA_TYPE_ID) {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            val sensorDataTypeId =
+                it.arguments?.getInt(Constants.Extras.SENSOR_DATA_TYPE_ID) ?: -1
             ChartScreen(
+                sensorDataTypeId = sensorDataTypeId,
                 onBack = {
                     navController.popBackStack()
-                }
+                },
             )
         }
         
         composable(Screen.Dashboard.route) {
             DashboardScreen(
-                navigateToChart = {
-                    navController.navigate(Screen.Chart.route)
+                navigateToChart = { sensorDataTypeId ->
+                    navController.navigate(
+                        Screen.Chart.createRoute(
+                            sensorDataTypeId = sensorDataTypeId,
+                        )
+                    )
                 },
                 restartApp = {
                     navController.navigate(Screen.Splash.route) {
