@@ -55,11 +55,11 @@ class SensorOutputDataMapper @Inject constructor() {
         return SensorOutput(
             airQuality = input?.airQuality.toFloatOrZero(),
             approxAltitude = input?.approxAltitude.toFloatOrZero(),
-            humidity = input?.persentaseKelembapanTanah.toFloatOrZero(),
+            humidity = input?.h.toFloatOrZero(),
             light = input?.light.toFloatOrZero(),
             pressure = input?.pressure.toFloatOrZero(),
             raindrop = input?.rainDrop.toFloatOrZero(),
-            soilMoisture = input?.h.toFloatOrZero(),
+            soilMoisture = input?.persentaseKelembapanTanah.toFloatOrZero(),
             temperature1 = input?.t.toFloatOrZero(),
             temperature2 = input?.temperature.toFloatOrZero(),
             timestampMillis = input?.timeAdded.toString()
