@@ -1,16 +1,20 @@
 package sv.ugm.sensormobile.presentation.ui.screen.splash
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import sv.ugm.sensormobile.presentation.ui.designsystem.component.Badge
 import sv.ugm.sensormobile.presentation.ui.designsystem.component.Icon
 import sv.ugm.sensormobile.presentation.ui.designsystem.icon.SensorMobileIcons
+import sv.ugm.sensormobile.presentation.util.CONTAINER_PADDING_DP
 
 @Composable
 fun SplashScreen(
@@ -43,9 +47,12 @@ private fun SplashContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .padding(CONTAINER_PADDING_DP.dp),
     ) {
-        SplashSection()
+        SplashSection(
+            state = state,
+        )
     }
     
     CheckLoginSession(
@@ -58,11 +65,31 @@ private fun SplashContent(
 }
 
 @Composable
-private fun SplashSection() {
-    Icon(
-        icon = SensorMobileIcons.Logo,
-        size = 80.dp,
-    )
+private fun SplashSection(
+    state: SplashState,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+    ) {
+        Icon(
+            icon = SensorMobileIcons.Logo,
+            size = 80.dp,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(
+                    bottom = 40.dp,
+                ),
+        )
+        Badge(
+            text = state.appVersion,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(
+                    bottom = 16.dp,
+                ),
+        )
+    }
 }
 
 @Composable
@@ -82,7 +109,6 @@ private fun CheckLoginSession(
                 navigateToDashboard()
                 startSensorAutoUpdateService()
             }
-            
         }
     }
 }
