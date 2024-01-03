@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -20,7 +19,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import sv.ugm.sensormobile.presentation.util.NavDrawerItem
 import sv.ugm.sensormobile.presentation.util.load
-import sv.ugm.sensormobile.presentation.util.toPainter
 
 @Composable
 fun NavDrawer(
@@ -52,7 +50,7 @@ fun NavDrawer(
                         NavigationDrawerItem(
                             icon = {
                                 Icon(
-                                    painter = item.icon.toPainter(),
+                                    icon = item.icon,
                                     contentDescription = null,
                                 )
                             },
