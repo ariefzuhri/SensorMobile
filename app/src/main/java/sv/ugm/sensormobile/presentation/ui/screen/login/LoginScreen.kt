@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -83,11 +82,8 @@ private fun LoginContent(
             state = state,
             viewModel = viewModel,
         )
-        Spacer(
-            modifier = Modifier
-                .heightIn(min = 64.dp)
-                .weight(1f)
-        )
+        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.weight(1f))
         FooterSection()
     }
 }
@@ -96,7 +92,7 @@ private fun LoginContent(
 private fun HeaderSection(
     state: LoginState,
 ) {
-    Column{
+    Column {
         Spacer(modifier = Modifier.height(72.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
