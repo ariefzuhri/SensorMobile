@@ -190,7 +190,7 @@ private fun LazyGridScope.summarySection(
             state.sensorSummary.latestPressure,
             state.sensorSummary.latestApproxAltitude,
         ),
-        key = { it.type.toString() },
+        key = { item -> item.type.id },
     ) { item ->
         SensorSummaryCard(
             title = when (item.type) {
