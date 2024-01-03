@@ -2,11 +2,18 @@ package sv.ugm.sensormobile.presentation.ui.screen.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +29,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import sv.ugm.sensormobile.R
+import sv.ugm.sensormobile.presentation.ui.designsystem.component.Badge
+import sv.ugm.sensormobile.presentation.ui.designsystem.component.Icon
 import sv.ugm.sensormobile.presentation.ui.designsystem.component.PrimaryButton
 import sv.ugm.sensormobile.presentation.ui.designsystem.component.TextField
 import sv.ugm.sensormobile.presentation.ui.designsystem.icon.SensorMobileIcons
@@ -63,65 +72,169 @@ private fun LoginContent(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(CONTAINER_PADDING_DP.dp),
+    ) {
+        HeaderSection(
+            state = state,
+        )
+        Spacer(modifier = Modifier.height(64.dp))
+        LoginSection(
+            state = state,
+            viewModel = viewModel,
+        )
+        Spacer(
+            modifier = Modifier
+                .heightIn(min = 64.dp)
+                .weight(1f)
+        )
+        FooterSection()
+    }
+}
+
+@Composable
+private fun HeaderSection(
+    state: LoginState,
+) {
+    Column{
+        Spacer(modifier = Modifier.height(72.dp))
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                icon = SensorMobileIcons.Logo,
+                size = 48.dp,
+            )
+            Spacer(modifier = Modifier.size(12.dp))
+            Text(
+                text = R.string.app_name.load(),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.headlineLarge,
+            )
+        }
+        Badge(
+            text = state.appVersion,
+            modifier = Modifier
+                .align(Alignment.End),
+        )
+    }
+}
+
+@Composable
+private fun LoginSection(
+    state: LoginState,
+    viewModel: LoginViewModel,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth(),
     ) {
         Text(
             text = R.string.txt_title_login.load(),
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
         )
-        
-        Spacer(modifier = Modifier.height(42.dp))
-        
-        TextField(
-            label = R.string.tf_label_email_login.load(),
-            leadingIcon = SensorMobileIcons.Email,
-            placeholder = R.string.tf_placeholder_email_login.load(),
-            value = state.email,
-            onValueChange = { email ->
-                viewModel.onEvent(
-                    LoginEvent.OnEmailChanged(email = email),
-                )
-            },
-            keyboardType = KeyboardType.Email,
-            capitalization = KeyboardCapitalization.None,
-            imeAction = ImeAction.Next,
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        TextField(
-            label = R.string.tf_label_password_login.load(),
-            leadingIcon = SensorMobileIcons.Password,
-            placeholder = R.string.tf_placeholder_password_login.load(),
-            value = state.password,
-            onValueChange = { password ->
-                viewModel.onEvent(
-                    LoginEvent.OnPasswordChanged(password = password),
-                )
-            },
-            keyboardType = KeyboardType.Password,
-            capitalization = KeyboardCapitalization.None,
-            visualTransformation = PasswordVisualTransformation(),
-        )
-        
-        Spacer(modifier = Modifier.height(24.dp))
-        
-        PrimaryButton(
-            title = R.string.btn_log_in_login.load(),
-            icon = SensorMobileIcons.Login,
-            onClick = {
-                viewModel.onEvent(
-                    LoginEvent.LogIn(
-                        email = state.email,
-                        password = state.password,
-                    ),
-                )
-            },
-            isLoading = state.isLoading,
-            enabled = state.email.isNotEmpty() && state.password.isNotEmpty(),
+        Spacer(modifier = Modifier.size(12.dp))
+        Divider(
+            thickness = (0.5).dp,
+            color = MaterialTheme.colorScheme.outlineVariant.copy(0.5f),
             modifier = Modifier
-                .fillMaxWidth(),
+                .width(56.dp)
         )
     }
+    
+    Spacer(modifier = Modifier.height(42.dp))
+    
+    TextField(
+        leadingIcon = SensorMobileIcons.Email,
+        placeholder = R.string.edt_placeholder_email_login.load(),
+        value = state.email,
+        onValueChange = { email ->
+            viewModel.onEvent(
+                LoginEvent.OnEmailChanged(email = email),
+            )
+        },
+        keyboardType = KeyboardType.Email,
+        capitalization = KeyboardCapitalization.None,
+        imeAction = ImeAction.Next,
+    )
+    
+    Spacer(modifier = Modifier.height(20.dp))
+    
+    TextField(
+        leadingIcon = SensorMobileIcons.Password,
+        placeholder = R.string.edt_placeholder_password_login.load(),
+        value = state.password,
+        onValueChange = { password ->
+            viewModel.onEvent(
+                LoginEvent.OnPasswordChanged(password = password),
+            )
+        },
+        keyboardType = KeyboardType.Password,
+        capitalization = KeyboardCapitalization.None,
+        visualTransformation = PasswordVisualTransformation(),
+    )
+    
+    Spacer(modifier = Modifier.height(42.dp))
+    
+    PrimaryButton(
+        title = R.string.btn_log_in_login.load(),
+        icon = SensorMobileIcons.Login,
+        onClick = {
+            viewModel.onEvent(
+                LoginEvent.LogIn(
+                    email = state.email,
+                    password = state.password,
+                ),
+            )
+        },
+        isLoading = state.isLoading,
+        enabled = state.email.isNotEmpty() && state.password.isNotEmpty(),
+        modifier = Modifier
+            .fillMaxWidth(),
+    )
+}
+
+@Composable
+private fun FooterSection() {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            icon = SensorMobileIcons.LightSensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.SoilMoistureSensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.AirQualitySensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.RaindropSensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.HumiditySensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.Temperature1Sensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.PressureSensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+        Icon(
+            icon = SensorMobileIcons.ApproxAltitudeSensor,
+            tint = MaterialTheme.colorScheme.outlineVariant,
+        )
+    }
+    Spacer(modifier = Modifier.height(16.dp))
 }

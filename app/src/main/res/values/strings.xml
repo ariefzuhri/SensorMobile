@@ -37,11 +37,9 @@
     <string name="btn_cd_view_chart_dashboard">View chart</string>
     <string name="btn_log_out_dashboard">Log out</string>
 
-    <string name="txt_title_login">Log In</string>
-    <string name="tf_label_email_login">Email</string>
-    <string name="tf_placeholder_email_login">Enter your email…</string>
-    <string name="tf_label_password_login">Password</string>
-    <string name="tf_placeholder_password_login">Enter password…</string>
+    <string name="txt_title_login">Log in to continue</string>
+    <string name="edt_placeholder_email_login">Enter your email…</string>
+    <string name="edt_placeholder_password_login">Enter password…</string>
     <string name="btn_log_in_login">Log In</string>
 
 </resources>
