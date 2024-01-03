@@ -1,10 +1,10 @@
 package sv.ugm.sensormobile.data.source.local
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import sv.ugm.sensormobile.data.source.local.provider.room.dao.SensorOutputDao
 import sv.ugm.sensormobile.data.source.local.provider.room.entity.SensorOutputEntity
 import sv.ugm.sensormobile.data.util.LocalResult
+import sv.ugm.sensormobile.data.util.invokeLocal
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,9 +14,7 @@ class SensorOutputLocalDataSource @Inject constructor(
 ) {
     
     fun getSensorOutputs(): Flow<LocalResult<List<SensorOutputEntity>>> {
-        return sensorOutputDao.getAll().map {
-            LocalResult.Success(it)
-        }
+        return sensorOutputDao.getAll().invokeLocal()
     }
     
     suspend fun insertSensorOutputs(sensorOutputEntities: List<SensorOutputEntity>) {

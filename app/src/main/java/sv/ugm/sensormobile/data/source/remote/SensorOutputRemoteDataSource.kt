@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import sv.ugm.sensormobile.data.source.remote.api.ApiService
 import sv.ugm.sensormobile.data.source.remote.api.response.SensorOutputsResponse
 import sv.ugm.sensormobile.data.util.RemoteResult
-import sv.ugm.sensormobile.data.util.invoke
+import sv.ugm.sensormobile.data.util.invokeApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,7 +14,7 @@ class SensorOutputRemoteDataSource @Inject constructor(
 ) {
     
     suspend fun getSensorOutputs(): Flow<RemoteResult<SensorOutputsResponse>> {
-        return apiService.getSensorOutputs().invoke()
+        return apiService.getSensorOutputs().invokeApi()
     }
     
 }

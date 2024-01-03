@@ -2,11 +2,11 @@ package sv.ugm.sensormobile.data.source.local
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import sv.ugm.sensormobile.data.source.local.provider.datastore.LoginSessionDataStore
 import sv.ugm.sensormobile.data.source.local.provider.datastore.model.LoginSessionPreference
 import sv.ugm.sensormobile.data.source.local.provider.statics.UserData
 import sv.ugm.sensormobile.data.util.LocalResult
+import sv.ugm.sensormobile.data.util.invokeLocal
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -43,9 +43,7 @@ class AuthLocalDataSource @Inject constructor(
     }
     
     fun getLoginSession(): Flow<LocalResult<LoginSessionPreference>> {
-        return loginSessionDataStore.get().map {
-            LocalResult.Success(it)
-        }
+        return loginSessionDataStore.get().invokeLocal()
     }
     
     suspend fun updateLoginSession(preference: LoginSessionPreference) {
