@@ -1,5 +1,7 @@
 package sv.ugm.sensormobile.presentation.ui.screen.splash
 
+import android.Manifest
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,14 +9,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import sv.ugm.sensormobile.presentation.ui.designsystem.component.Badge
 import sv.ugm.sensormobile.presentation.ui.designsystem.component.Icon
 import sv.ugm.sensormobile.presentation.ui.designsystem.icon.SensorMobileIcons
 import sv.ugm.sensormobile.presentation.util.CONTAINER_PADDING_DP
+import sv.ugm.sensormobile.presentation.util.showToast
 
 @Composable
 fun SplashScreen(
@@ -28,20 +36,22 @@ fun SplashScreen(
     
     SplashContent(
         state = state,
+    )
+    
+    CheckLoginSession(
+        state = state,
         navigateToLogin = navigateToLogin,
         navigateToDashboard = navigateToDashboard,
         startSensorAutoUpdateService = startSensorAutoUpdateService,
         stopSensorAutoUpdateService = stopSensorAutoUpdateService,
     )
+    
+    CheckNotificationPermission()
 }
 
 @Composable
 private fun SplashContent(
     state: SplashState,
-    navigateToLogin: () -> Unit,
-    navigateToDashboard: () -> Unit,
-    startSensorAutoUpdateService: () -> Unit,
-    stopSensorAutoUpdateService: () -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -54,14 +64,6 @@ private fun SplashContent(
             state = state,
         )
     }
-    
-    CheckLoginSession(
-        state = state,
-        navigateToLogin = navigateToLogin,
-        navigateToDashboard = navigateToDashboard,
-        startSensorAutoUpdateService = startSensorAutoUpdateService,
-        stopSensorAutoUpdateService = stopSensorAutoUpdateService,
-    )
 }
 
 @Composable
@@ -108,6 +110,28 @@ private fun CheckLoginSession(
             } else {
                 navigateToDashboard()
                 startSensorAutoUpdateService()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun CheckNotificationPermission() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val context = LocalContext.current
+        
+        val notificationPermissionState = rememberPermissionState(
+            Manifest.permission.POST_NOTIFICATIONS,
+        )
+        
+        if (notificationPermissionState.status.isGranted.not()) {
+            SideEffect {
+                showToast(
+                    context = context,
+                    message = "The app needs notification permission to work properly.",
+                )
+                notificationPermissionState.launchPermissionRequest()
             }
         }
     }
