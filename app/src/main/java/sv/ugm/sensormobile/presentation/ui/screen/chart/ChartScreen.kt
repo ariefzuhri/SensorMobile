@@ -73,13 +73,13 @@ private fun ChartContent(
                     id = R.string.txt_title_chart,
                     state.chartTitle.load(),
                 ),
-                menuContDesc = R.string.btn_cd_menu_topbar_chart.load(),
                 onMenuClick = {
                     scope.launch {
                         if (drawerState.isOpen) drawerState.close()
                         else drawerState.open()
                     }
                 },
+                onMenuContDesc = R.string.btn_cd_menu_topbar_chart.load(),
             )
         },
     ) { innerPadding ->
