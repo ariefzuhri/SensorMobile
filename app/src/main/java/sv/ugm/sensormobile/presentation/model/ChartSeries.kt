@@ -1,7 +1,5 @@
 package sv.ugm.sensormobile.presentation.model
 
-import androidx.annotation.StringRes
-
 // Null labels are used to indicate that the label is equal to the value
 
 data class ChartSeries(
@@ -13,7 +11,6 @@ data class ChartSeries(
 ) {
     
     data class ChartDataset(
-        @StringRes val label: Int,
         val entries: List<ChartEntry>,
     )
     

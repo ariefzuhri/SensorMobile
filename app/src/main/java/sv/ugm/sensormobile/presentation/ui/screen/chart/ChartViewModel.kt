@@ -1,13 +1,11 @@
 package sv.ugm.sensormobile.presentation.ui.screen.chart
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import sv.ugm.sensormobile.domain.enums.SensorOutputUnit
 import sv.ugm.sensormobile.domain.usecase.GetSensorDataUseCase
 import sv.ugm.sensormobile.domain.util.Result
 import sv.ugm.sensormobile.domain.util.SensorDataType
@@ -63,51 +61,31 @@ class ChartViewModel @Inject constructor(
             getSensorDataUseCase(
                 sensorDataType = sensorDataType,
             ).collect { result ->
-                // TODO: Are these clean?
-                @StringRes val sensorDataName = _state.value.navDrawerItemList
-                    .first { it.sensorDataType == sensorDataType }.title
-                val sensorOutputUnit = when (sensorDataType) {
-                    SensorDataType.AirQuality -> SensorOutputUnit.AIR_QUALITY
-                    SensorDataType.ApproxAltitude -> SensorOutputUnit.APPROX_ALTITUDE
-                    SensorDataType.Humidity -> SensorOutputUnit.HUMIDITY
-                    SensorDataType.Light -> SensorOutputUnit.LIGHT
-                    SensorDataType.Pressure -> SensorOutputUnit.PRESSURE
-                    SensorDataType.Raindrop -> SensorOutputUnit.RAINDROP
-                    SensorDataType.SoilMoisture -> SensorOutputUnit.SOIL_MOISTURE
-                    SensorDataType.Temperature1 -> SensorOutputUnit.TEMPERATURE_1
-                    SensorDataType.Temperature2 -> SensorOutputUnit.TEMPERATURE_2
-                }.unit
-                
                 when (result) {
                     is Result.Loading -> {
                         _state.value = _state.value.copy(
-                            chartTitle = sensorDataName,
                             isLoading = true,
                         )
                     }
                     
                     is Result.Success -> {
                         _state.value = _state.value.copy(
-                            chartTitle = sensorDataName,
+                            selectedSensorDataType = sensorDataType,
                             chartData = mapper.mapDomainToPresentation(
                                 input = result.data,
-                                label = sensorDataName,
-                                unit = sensorOutputUnit,
+                                sensorDataType = sensorDataType,
                             ),
-                            isLoading = false,
                         )
                     }
                     
                     is Result.Empty -> {
                         _state.value = _state.value.copy(
-                            chartTitle = sensorDataName,
                             isLoading = false,
                         )
                     }
                     
                     is Result.Failure -> {
                         _state.value = _state.value.copy(
-                            chartTitle = sensorDataName,
                             isLoading = false,
                             failureMessage = mutableStateOf(result.message),
                         )

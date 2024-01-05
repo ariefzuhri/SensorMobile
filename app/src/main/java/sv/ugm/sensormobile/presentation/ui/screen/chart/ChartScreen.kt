@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -78,12 +79,31 @@ private fun ChartContent(
     viewModel: ChartViewModel,
     onBack: () -> Unit,
 ) {
+    val navDrawerItemList = remember {
+        listOf(
+            ChartNavDrawerItem.LightChart,
+            ChartNavDrawerItem.SoilMoistureChart,
+            ChartNavDrawerItem.AirQualityChart,
+            ChartNavDrawerItem.RaindropChart,
+            ChartNavDrawerItem.HumidityChart,
+            ChartNavDrawerItem.Temperature1Chart,
+            ChartNavDrawerItem.Temperature2Chart,
+            ChartNavDrawerItem.PressureChart,
+            ChartNavDrawerItem.ApproxAltitudeChart,
+        )
+    }
+    val selectedSensorDataTypeName = remember(state.selectedSensorDataType) {
+        navDrawerItemList.first {
+            it.sensorDataType == state.selectedSensorDataType
+        }.title
+    }.load()
+    
     Scaffold(
         topBar = {
             TopBar(
                 title = stringResource(
                     id = R.string.txt_title_chart,
-                    state.chartTitle.load(),
+                    selectedSensorDataTypeName,
                 ),
                 onBackClick = {
                     onBack()
@@ -102,7 +122,7 @@ private fun ChartContent(
         NavDrawer(
             drawerState = drawerState,
             scope = scope,
-            itemList = state.navDrawerItemList,
+            itemList = navDrawerItemList,
             onItemSelected = { item ->
                 viewModel.onEvent(
                     ChartEvent.OnSensorDataTypeSelected(
@@ -117,7 +137,10 @@ private fun ChartContent(
                 modifier = Modifier
                     .padding(CONTAINER_PADDING_DP.dp),
             ) {
-                ChartSection(state)
+                ChartSection(
+                    state = state,
+                    selectedSensorDataTypeName = selectedSensorDataTypeName,
+                )
             }
         }
     }
@@ -126,9 +149,10 @@ private fun ChartContent(
 @Composable
 private fun ChartSection(
     state: ChartState,
+    selectedSensorDataTypeName: String,
 ) {
     val chartLegend = chartLegend(
-        state.chartTitle.load(),
+        selectedSensorDataTypeName,
     )
     LineChart(
         series = state.chartData,
