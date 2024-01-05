@@ -62,12 +62,6 @@ class ChartViewModel @Inject constructor(
                 sensorDataType = sensorDataType,
             ).collect { result ->
                 when (result) {
-                    is Result.Loading -> {
-                        _state.value = _state.value.copy(
-                            isLoading = true,
-                        )
-                    }
-                    
                     is Result.Success -> {
                         _state.value = _state.value.copy(
                             selectedSensorDataType = sensorDataType,
@@ -78,18 +72,7 @@ class ChartViewModel @Inject constructor(
                         )
                     }
                     
-                    is Result.Empty -> {
-                        _state.value = _state.value.copy(
-                            isLoading = false,
-                        )
-                    }
-                    
-                    is Result.Failure -> {
-                        _state.value = _state.value.copy(
-                            isLoading = false,
-                            failureMessage = mutableStateOf(result.message),
-                        )
-                    }
+                    else -> {}
                 }
             }
         }

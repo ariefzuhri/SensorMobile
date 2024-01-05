@@ -1,7 +1,5 @@
 package sv.ugm.sensormobile.presentation.ui.screen.chart
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import sv.ugm.sensormobile.domain.util.SensorDataType
 import sv.ugm.sensormobile.presentation.model.ChartSeries
 
@@ -14,6 +12,4 @@ data class ChartState(
         null,
         emptyList(),
     ),
-    val isLoading: Boolean = false,
-    val failureMessage: State<String?> = mutableStateOf(null),
 )

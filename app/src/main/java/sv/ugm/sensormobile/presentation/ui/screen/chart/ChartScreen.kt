@@ -14,7 +14,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,7 +27,6 @@ import sv.ugm.sensormobile.presentation.ui.designsystem.component.chartLegend
 import sv.ugm.sensormobile.presentation.util.CONTAINER_PADDING_DP
 import sv.ugm.sensormobile.presentation.util.ChartNavDrawerItem
 import sv.ugm.sensormobile.presentation.util.LockScreenOrientation
-import sv.ugm.sensormobile.presentation.util.asToast
 import sv.ugm.sensormobile.presentation.util.load
 
 @Composable
@@ -56,11 +54,6 @@ fun ChartScreen(
         viewModel = viewModel,
         onBack = onBack,
     )
-    
-    val context = LocalContext.current
-    LaunchedEffect(state.failureMessage) {
-        state.failureMessage.value.asToast(context)
-    }
     
     BackHandler(enabled = drawerState.isOpen) {
         scope.launch { drawerState.close() }
