@@ -13,8 +13,8 @@ import sv.ugm.sensormobile.presentation.ui.screen.dashboard.DashboardScreen
 import sv.ugm.sensormobile.presentation.ui.screen.login.LoginScreen
 import sv.ugm.sensormobile.presentation.ui.screen.splash.SplashScreen
 import sv.ugm.sensormobile.presentation.util.Constants
-import sv.ugm.sensormobile.presentation.util.startSensorAutoUpdateService
-import sv.ugm.sensormobile.presentation.util.stopSensorAutoUpdateService
+import sv.ugm.sensormobile.presentation.util.startSensorMonitoringService
+import sv.ugm.sensormobile.presentation.util.stopSensorMonitoringService
 
 @Composable
 fun NavGraph(
@@ -99,11 +99,11 @@ fun NavGraph(
                         }
                     }
                 },
-                startSensorAutoUpdateService = {
-                    startSensorAutoUpdateService(context)
+                startSensorMonitoringService = {
+                    startSensorMonitoringService(context)
                 },
-                stopSensorAutoUpdateService = {
-                    stopSensorAutoUpdateService(context)
+                stopSensorMonitoringService = {
+                    stopSensorMonitoringService(context)
                 },
             )
         }

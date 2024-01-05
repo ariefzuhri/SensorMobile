@@ -2,20 +2,20 @@ package sv.ugm.sensormobile.presentation.util
 
 import android.content.Context
 import android.content.Intent
-import sv.ugm.sensormobile.presentation.service.SensorAutoUpdateService
+import sv.ugm.sensormobile.presentation.service.SensorMonitoringService
 
-fun startSensorAutoUpdateService(context: Context?) {
+fun startSensorMonitoringService(context: Context?) {
     val intent = Intent(
         context,
-        SensorAutoUpdateService::class.java,
+        SensorMonitoringService::class.java,
     )
     startService(context, intent)
 }
 
-fun stopSensorAutoUpdateService(context: Context?) {
+fun stopSensorMonitoringService(context: Context?) {
     val intent = Intent(
         context,
-        SensorAutoUpdateService::class.java,
+        SensorMonitoringService::class.java,
     )
     context?.stopService(intent)
 }

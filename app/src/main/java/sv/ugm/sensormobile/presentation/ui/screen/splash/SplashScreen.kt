@@ -28,8 +28,8 @@ import sv.ugm.sensormobile.presentation.util.showToast
 fun SplashScreen(
     navigateToLogin: () -> Unit,
     navigateToDashboard: () -> Unit,
-    startSensorAutoUpdateService: () -> Unit,
-    stopSensorAutoUpdateService: () -> Unit,
+    startSensorMonitoringService: () -> Unit,
+    stopSensorMonitoringService: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
@@ -42,8 +42,8 @@ fun SplashScreen(
         state = state,
         navigateToLogin = navigateToLogin,
         navigateToDashboard = navigateToDashboard,
-        startSensorAutoUpdateService = startSensorAutoUpdateService,
-        stopSensorAutoUpdateService = stopSensorAutoUpdateService,
+        startSensorMonitoringService = startSensorMonitoringService,
+        stopSensorMonitoringService = stopSensorMonitoringService,
     )
     
     CheckNotificationPermission()
@@ -99,17 +99,17 @@ private fun CheckLoginSession(
     state: SplashState,
     navigateToLogin: () -> Unit,
     navigateToDashboard: () -> Unit,
-    startSensorAutoUpdateService: () -> Unit,
-    stopSensorAutoUpdateService: () -> Unit,
+    startSensorMonitoringService: () -> Unit,
+    stopSensorMonitoringService: () -> Unit,
 ) {
     LaunchedEffect(state.isLoggedIn) {
         if (!state.isLoading) {
             if (state.isLoggedIn == false) {
                 navigateToLogin()
-                stopSensorAutoUpdateService()
+                stopSensorMonitoringService()
             } else {
                 navigateToDashboard()
-                startSensorAutoUpdateService()
+                startSensorMonitoringService()
             }
         }
     }

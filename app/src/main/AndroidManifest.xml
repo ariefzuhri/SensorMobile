@@ -31,7 +31,7 @@
         </activity>
 
         <service
-            android:name=".presentation.service.SensorAutoUpdateService"
+            android:name=".presentation.service.SensorMonitoringService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync"

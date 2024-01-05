@@ -4,10 +4,10 @@
 
     <string name="nd">–</string>
 
-    <string name="notif_channel_id_sensorautoupdate">sensor_auto_update</string>
-    <string name="notif_channel_name_sensorautoupdate">Sensor Auto-update</string>
-    <string name="notif_channel_desc_sensorautoupdate">Automatic sensor data updates</string>
-    <string name="notif_message_sensorautoupdate">Monitoring sensor data updates…</string>
+    <string name="notif_channel_id_sensormonitoring">sensor_monitoring</string>
+    <string name="notif_channel_name_sensormonitoring">Sensor Monitoring</string>
+    <string name="notif_channel_desc_sensormonitoring">Auto-update sensor data</string>
+    <string name="notif_message_sensormonitoring">Monitoring sensor…</string>
 
     <string name="txt_title_chart">%1$s Sensor</string>
     <string name="btn_cd_back_chart">Back to previous screen</string>

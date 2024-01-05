@@ -16,7 +16,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SensorAutoUpdateService : Service() {
+class SensorMonitoringService : Service() {
     
     private val notificationId = UUID.randomUUID().hashCode()
     
@@ -42,9 +42,9 @@ class SensorAutoUpdateService : Service() {
             notificationId,
             buildNotification(
                 context = this,
-                channelId = getString(R.string.notif_channel_id_sensorautoupdate),
+                channelId = getString(R.string.notif_channel_id_sensormonitoring),
                 id = notificationId,
-                message = getString(R.string.notif_message_sensorautoupdate),
+                message = getString(R.string.notif_message_sensormonitoring),
             ),
         )
     }
